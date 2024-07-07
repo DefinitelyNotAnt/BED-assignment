@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/reg.css">
+    <title>Register New User</title>
+</head>
+<body>
+    <section id="mainSection">
+        <div class="flexBox">
+            <h1 id="signIn">Create Account</h1>
+            <h2 id="signInDescription">Register a new user with us!</h2>
+        </div>
+        <div class="flexBox">
+            <div id="createUser" class="inputLabel padItem"><div>Enter new Username</div></div>
+            <input type="text" id="getUser">
+            <label class="inputLabel padItem">Enter backup email</label>
+            <input type="email" id="getEmail">
+            <label class="inputLabel padItem">Create a Password</label>
+            <input type="password" id="getPassword">
+            <div id="confirmLabel" class="inputLabel padItem"><div>Confirm Password</div></div>
+            <input type="password" id="confirmPassword">
+            <div class="buttons">
+                <button id="signNext" class="finalPress" onclick="returnFalse()"><a href="next.html">Create Account</a></button>
+            </div>
+        </div>
+    </section>
+    <script src="../scripts/reg.js"></script>
+</body>
+</html>

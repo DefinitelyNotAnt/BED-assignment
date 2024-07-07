@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/index.css">
+    <title>Sign In</title>
+</head>
+<body>
+    <form method="post" id="loginForm" action="/users/login" method="POST">
+        <fieldset id="mainSection">
+            <div class="flexBox">
+                <h1 id="signIn">Sign In</h1>
+                <h2 id="signInDescription">Sign in to existing user</h2>
+            </div>
+            <div class="flexBox">
+                <label class="inputLabel padItem">Username</label>
+                <input type="text" id="getUser">
+                <label class="inputLabel padItem">Password</label>
+                <input type="password" id="getPassword">
+                <div id="forgetPassword" class="padItem"><a href="::blank">Forgot Password?</a></div>
+                <div class="buttons">
+                    <button id="regNew" class="finalPress"><a href="./html/regUser.html">Register an account</a></button>
+                    <button id="signNext" class="finalPress" value="submit" type="submit" onclick="fetchUserSession()">Sign In</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <script src="./scripts/index.js"></script>
+</body>
+</html>
