@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale = 1.0">
+  <title>Createplace form</title>
+  <link rel ="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <div class = "container">
+        <!-- <form action="http://localhost:3001/places" method="POST">
+            <h3>Create places</h3>
+            <input type = "text" id="place name" placeholder="Place name" required>
+            <textarea id = "text" rows = "4" placeholder="Descriptions" required></textarea>
+            <input type = "text" id="description" placeholder="Description" required>
+            <input type = "text" id="time" placeholder="Operating hours" required>
+            <input type = "text" id="address" placeholder="Address" required>
+            <button type = "submit">Send</button>
+        </form> -->
+        <form id="placeForm">
+            <h3>Create places</h3>
+            <input type="text" id="name" placeholder="Place name" required>
+            <input type="text" id="description" placeholder="Description" required>
+            <input type="text" id="operatinghours" placeholder="Operating hours" required>
+            <input type="text" id="address" placeholder="Address" required>
+            <button type="submit">Send</button>
+        </form>
+        
+    </div>
+    <script>
+        document.getElementById('placeForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the default way
+            
+            // Create a FormData object to hold the form data
+            let formData = 
+            {
+                name: document.getElementById('name').value,
+                description: document.getElementById('description').value,
+                operatinghours: document.getElementById('operatinghours').value,
+                address: document.getElementById('address').value
+            };
+
+            console.log(formData);
+            // Send the form data using fetch
+            fetch('http://localhost:3001/places', 
+            {
+                method: 'POST',
+                headers: 
+                {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // You can add any additional success handling code here
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // You can add any additional error handling code here
+            });
+        });
+        </script>
+</body>
+</html>
