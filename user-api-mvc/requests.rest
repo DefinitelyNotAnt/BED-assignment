@@ -1,0 +1,29 @@
+GET http://localhost:3000/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ29ybiIsImlhdCI6MTcyMTAyODQ0NywiZXhwIjoxNzIxMDI4NDYyfQ.JkhSRa9m_YYk1G5o5iya08zIjiJ8OSFCl3Gzxz1v348
+
+###
+
+POST http://localhost:4000/token
+Content-Type: application/json
+
+{
+    "token": 
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ29ybiIsImlhdCI6MTcyMTAyODUyNH0.5N5htAeD_7GKLtAqBa_7YhdiGvkG20zP9RHAZSpa6Rw"
+}
+###
+DELETE http://localhost:4000/logout
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ29ybiIsImlhdCI6MTcyMTAyNjkxM30.9JacPckXX8sKMBE2zudkyLHovqfJmQrXr0d1ZhNDg6Q"
+}
+
+### 
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username": "Corn",
+    "password": "CHECK",
+    "title": "TestPost"
+}

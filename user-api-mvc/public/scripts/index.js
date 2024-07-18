@@ -1,4 +1,7 @@
+const form = document.getElementById("loginForm");
+
 function fetchUserSession(){
+
     const user = document.getElementById("getUser").innerText;
     const password = document.getElementById("getPassword").innerText;
     console.log(user);
@@ -6,7 +9,7 @@ function fetchUserSession(){
         "loginName": user,
         "password": password
      }
-    fetch('/users', {
+    fetch('/login', {
           method: 'get',
           headers: {
             'Accept': 'application/json, text/plain, */*',

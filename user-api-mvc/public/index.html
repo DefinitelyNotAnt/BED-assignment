@@ -7,7 +7,7 @@
     <title>Sign In</title>
 </head>
 <body>
-    <form method="post" id="loginForm" action="/users/login" method="POST">
+    <form method="post" id="loginForm" action="http://localhost:3000/login" method="POST">
         <fieldset id="mainSection">
             <div class="flexBox">
                 <h1 id="signIn">Sign In</h1>
@@ -15,13 +15,13 @@
             </div>
             <div class="flexBox">
                 <label class="inputLabel padItem">Username</label>
-                <input type="text" id="getUser">
+                <input type="text" name="username" value="username">
                 <label class="inputLabel padItem">Password</label>
-                <input type="password" id="getPassword">
+                <input type="password" name="password" value="password">
                 <div id="forgetPassword" class="padItem"><a href="::blank">Forgot Password?</a></div>
                 <div class="buttons">
                     <button id="regNew" class="finalPress"><a href="./html/regUser.html">Register an account</a></button>
-                    <button id="signNext" class="finalPress" value="submit" type="submit" onclick="fetchUserSession()">Sign In</button>
+                    <button id="signNext" class="finalPress" value="submit" type="submit">Sign In</button>
                 </div>
             </div>
         </fieldset>

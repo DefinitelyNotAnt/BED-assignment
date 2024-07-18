@@ -7,22 +7,22 @@
     <title>Register New User</title>
 </head>
 <body>
-    <section id="mainSection">
+    <form id="mainSection" action="http://localhost:3000/users" method="POST">
         <div class="flexBox">
             <h1 id="signIn">Create Account</h1>
             <h2 id="signInDescription">Register a new user with us!</h2>
         </div>
-        <div class="flexBox">
+        <form class="flexBox">
             <div id="createUser" class="inputLabel padItem"><div>Enter new Username</div></div>
-            <input type="text" id="getUser">
+            <input type="text" name="username">
             <label class="inputLabel padItem">Enter backup email</label>
-            <input type="email" id="getEmail">
+            <input type="email" name="email">
             <label class="inputLabel padItem">Create a Password</label>
-            <input type="password" id="getPassword">
+            <input type="password" name="password">
             <div id="confirmLabel" class="inputLabel padItem"><div>Confirm Password</div></div>
-            <input type="password" id="confirmPassword">
+            <input type="password" name="confirmPassword">
             <div class="buttons">
-                <button id="signNext" class="finalPress" onclick="returnFalse()"><a href="next.html">Create Account</a></button>
+                <button id="signNext" class="finalPress" value="submit">Create Account</button>
             </div>
         </div>
     </section>

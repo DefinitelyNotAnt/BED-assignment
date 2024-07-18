@@ -3,8 +3,10 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "browserify": "^17.0.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "mssql": "^11.0.0",
     "node": "^20.15.0",
     "path": "^0.12.7"
@@ -13,10 +15,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "devStartAuth": "nodemon authServer.js",
+    "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "userdb"
+  "description": "userdb",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }

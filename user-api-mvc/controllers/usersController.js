@@ -55,7 +55,7 @@ const updateUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   console.log("Create");
-  const newUser = req.query;
+  const newUser = req.body;
   try {
     const createdUser = await User.createUser(newUser);
     res.status(201).json(createdUser);
@@ -81,9 +81,8 @@ const deleteUser = async (req, res) => {
 };
 
 const loginUser = async (req,res) => {
-  console.log(req);
-  const username = req.query.getUser;
-  const password = req.query.getPassword;
+  const username = req.body.username;
+  const password = req.body.password;
   try{
     const success = await User.loginUser(username, password);
     if (!success) {

@@ -1,5 +1,6 @@
 const sql = require("mssql");
 const dbConfig = require("../dbConfig");
+const bcrypt = require("bcrypt");
 
 class User {
   constructor(userId,loginName, password, email, access) {
@@ -47,14 +48,15 @@ class User {
   }
 
   static async updateUser(id, newUserData) {
+    const hashedPassword = await bcrypt.hash(newUserData.password, 10);
     const connection = await sql.connect(dbConfig);
 
-    const sqlQuery = `UPDATE Users SET LoginName = @loginName, PasswordHash = HASHBYTES('SHA2_256', @password ), Email = @email WHERE UserID = @id`; // Parameterized query
+    const sqlQuery = `UPDATE Users SET LoginName = @loginName, PasswordHash = @hashedPassword, Email = @email WHERE UserID = @id`; // Parameterized query
 
     const request = connection.request();
     request.input("id", id);
     request.input("loginName", newUserData.loginName || null); // Handle optional fields
-    request.input("password", newUserData.password || null);
+    request.input("password", password || null);
     request.input("email", newUserData.email || null);
 
     await request.query(sqlQuery);
@@ -65,14 +67,15 @@ class User {
   }
 
   static async createUser(newUserData) {
+    const hashedPassword = await bcrypt.hash(newUserData.password, 10);
     const connection = await sql.connect(dbConfig);
-    const sqlQuery = `INSERT INTO Users (LoginName, PasswordHash, Email, Access) VALUES (@loginName, HASHBYTES('SHA2_256',@password), @email, @access); SELECT SCOPE_IDENTITY() AS UserID;`; // Retrieve ID of inserted record
+    const sqlQuery = `INSERT INTO Users (LoginName, PasswordHash, Email, Access) VALUES (@loginName, @hashedPassword, @email, @access); SELECT SCOPE_IDENTITY() AS UserID;`; // Retrieve ID of inserted record
 
     const request = connection.request();
-    request.input("loginName", newUserData.loginName);
-    request.input("password", newUserData.password);
+    request.input("loginName", newUserData.username);
+    request.input("hashedpassword", hashedPassword);
     request.input("email", newUserData.email);
-    request.input("access",newUserData.access);
+    request.input("access","M");
 
     const result = await request.query(sqlQuery);
 
@@ -99,22 +102,46 @@ class User {
   static async loginUser(username,password){
     const connection = await sql.connect(dbConfig);
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    const sqlQuery = `SELECT * FROM Users WHERE LoginName = @username AND PasswordHash = HASHBYTES('SHA2_256',@password)`; // Parameterized query
+    const sqlQuery = `SELECT * FROM Users WHERE LoginName = @username`; // Parameterized query
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     const request = connection.request();
     request.input("username", username);
-    request.input("password",password)
     const result = await request.query(sqlQuery);
 
     connection.close();
-
-    return result.recordset[0]
-      ? new User(
-          result.recordset[0].UserID,
-          result.recordset[0].LoginName,
-          result.recordset[0].PasswordHash
+    if (result.recordset[0] == null){
+      return null;
+    }
+    try{
+      console.log("Yes");
+      console.log(result.recordset[0].PasswordHash);
+      if (await bcrypt.compare(password, result.recordset[0].PasswordHash)){
+        const user = {
+            userid: result.recordset[0].UserID,
+            username: result.recordset[0].LoginName,
+            password: password
+        }
+        console.log("Success");
+        const accessToken = generateAccessToken(user);
+        const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+        res.json(
+            { 
+                accessToken: accessToken,
+                refreshToken: refreshToken
+            }
         )
-      : null; // Handle user not found or wrong password
+        refreshTokens.push(refreshToken);
+        return refreshToken;
+      };
+    }
+    catch{
+      return null;
+    }
+  }
+  generateAccessToken(user) {
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: '60000s'
+    })
   }
 
   // static async searchUsers(searchTerm) {
