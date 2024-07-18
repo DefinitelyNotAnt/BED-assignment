@@ -1,6 +1,7 @@
 const sql = require("mssql");
 const dbConfig = require("../dbConfig");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 class User {
   constructor(userId,loginName, password, email, access) {
@@ -9,6 +10,7 @@ class User {
     this.password = password;
     this.email = email;
     this.access = access;
+    this.refreshTokens = [];
   }
 
 
@@ -69,20 +71,30 @@ class User {
   static async createUser(newUserData) {
     const hashedPassword = await bcrypt.hash(newUserData.password, 10);
     const connection = await sql.connect(dbConfig);
-    const sqlQuery = `INSERT INTO Users (LoginName, PasswordHash, Email, Access) VALUES (@loginName, @hashedPassword, @email, @access); SELECT SCOPE_IDENTITY() AS UserID;`; // Retrieve ID of inserted record
-
+    const sqlQueryCheck = `SELECT * FROM Users WHERE LoginName = @userName;`;
     const request = connection.request();
-    request.input("loginName", newUserData.username);
-    request.input("hashedpassword", hashedPassword);
-    request.input("email", newUserData.email);
-    request.input("access","M");
+    request.input("userName",newUserData.username);
 
-    const result = await request.query(sqlQuery);
+    const checkResult = await request.query(sqlQueryCheck);
+    if (checkResult.recordset[0] == null){
+      const sqlQuery = `INSERT INTO Users (LoginName, PasswordHash, Email, Access) VALUES (@loginName, @hashedPassword, @email, @access); SELECT SCOPE_IDENTITY() AS UserID;`; // Retrieve ID of inserted record
 
+
+      request.input("loginName", newUserData.username);
+      request.input("hashedpassword", hashedPassword);
+      request.input("email", newUserData.email);
+      request.input("access","M");
+
+      const result = await request.query(sqlQuery);
+      connection.close();
+      // Retrieve the newly created User using its ID
+      return this.getUserById(result.recordset[0].id);
+    }
     connection.close();
+    return "User Taken";
+    
 
-    // Retrieve the newly created User using its ID
-    return this.getUserById(result.recordset[0].id);
+
   }
 
   static async deleteUser(id) {
@@ -122,19 +134,19 @@ class User {
             password: password
         }
         console.log("Success");
-        const accessToken = generateAccessToken(user);
+        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+          expiresIn: '60000s'
+      });
+        console.log("Works")
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-        res.json(
-            { 
-                accessToken: accessToken,
-                refreshToken: refreshToken
-            }
-        )
-        refreshTokens.push(refreshToken);
-        return refreshToken;
+        console.log(refreshToken);
+        
+        // this.refreshTokens.push(refreshToken);
+        return {accessToken, refreshToken};
       };
     }
-    catch{
+    catch (err){
+      console.log(err);
       return null;
     }
   }

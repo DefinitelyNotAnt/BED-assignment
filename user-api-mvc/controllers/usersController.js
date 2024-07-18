@@ -58,6 +58,10 @@ const createUser = async (req, res) => {
   const newUser = req.body;
   try {
     const createdUser = await User.createUser(newUser);
+    if (createUser == "User Taken"){
+      console.log("User taken");
+      
+    }
     res.status(201).json(createdUser);
   } catch (error) {
     console.error(error);
@@ -84,9 +88,12 @@ const loginUser = async (req,res) => {
   const username = req.body.username;
   const password = req.body.password;
   try{
-    const success = await User.loginUser(username, password);
-    if (!success) {
+    const {accessToken,refreshToken} = await User.loginUser(username, password);
+    if (accessToken == null) {
       return res.status(404).send("Failed to log in.");
+    }
+    else{
+      return res.json({accessToken,refreshToken});
     }
   }
   catch(error){

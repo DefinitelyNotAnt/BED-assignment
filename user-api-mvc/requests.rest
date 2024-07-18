@@ -1,5 +1,5 @@
-GET http://localhost:3000/posts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ29ybiIsImlhdCI6MTcyMTAyODQ0NywiZXhwIjoxNzIxMDI4NDYyfQ.JkhSRa9m_YYk1G5o5iya08zIjiJ8OSFCl3Gzxz1v348
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjMsInVzZXJuYW1lIjoiTWFuVGVzdFdvcmsiLCJwYXNzd29yZCI6IjEyMzQ1Njc4IiwiaWF0IjoxNzIxMjgzNzM3LCJleHAiOjE3MjEzNDM3Mzd9._g4Qq5AS5iJfJsEHc1KNbk9PUFnQapyviWvNmPldHKw
 
 ###
 
@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
     "token": 
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ29ybiIsImlhdCI6MTcyMTAyODUyNH0.5N5htAeD_7GKLtAqBa_7YhdiGvkG20zP9RHAZSpa6Rw"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOjMsInVzZXJuYW1lIjoiTWFuVGVzdFdvcmsiLCJwYXNzd29yZCI6IjEyMzQ1Njc4IiwiaWF0IjoxNzIxMjgzNzM3LCJleHAiOjE3MjEzNDM3Mzd9._g4Qq5AS5iJfJsEHc1KNbk9PUFnQapyviWvNmPldHKw"
 }
 ###
 DELETE http://localhost:4000/logout
@@ -23,7 +23,7 @@ POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "username": "Corn",
+    "username": "ManTestWork",
     "password": "CHECK",
     "title": "TestPost"
 }
