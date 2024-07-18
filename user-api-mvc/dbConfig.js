@@ -21,3 +21,13 @@ module.exports = {
 //     CONSTRAINT [PK_User_UserID] PRIMARY KEY CLUSTERED (UserID ASC)
 // )
 
+// CREATE TABLE Events (
+//   EventId INT IDENTITY(1,1) PRIMARY KEY,
+//   EventName VARCHAR(50) NOT NULL, -- Name is required and unique (cannot be NULL)
+//   EventDesc VARCHAR(800) NOT NULL, -- Description is required (cannot be NULL)
+//   EventStartTime smalldatetime NOT NULL,
+//   EventEndTime smalldatetime NOT NULL,
+//   EntryPrice smallmoney NULL,
+//   HostId tinyint NOT NULL
+//   --CONSTRAINT FK_HostId FOREIGN KEY (HostId) REFERENCES Users(UserId)
+// );
