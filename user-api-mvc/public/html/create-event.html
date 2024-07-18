@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events App</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+  </head>
+  <body>
+    <h1>Create Event</h1>
+
+    <form id="eventForm">
+        <label for="event-name">Event Name:</label>
+        <input type="text" id="event-name" name="event-name" required />
+        <label for="event-date">Event Date:</label>
+        <input type="date" id="event-date" name="event-date" required />
+        <label for="event-start-time">Event Start Time:</label>
+        <input type="time" id="event-start-time" name="event-start-time" required />
+        <label for="event-end-time">Event End Time:</label>
+        <input type="time" id="event-end-time" name="event-end-time" required />
+        <label for="event-description">Event Description:</label>
+        <input type="text" id="event-description" name="event-description" required />
+        <label for="event-price">Event Price:</label>
+        <input type="number" id="event-price" name="event-price" />
+        <button type="submit">Create Event</button>
+    </form>
+    
+  <a href="event-index.html">Back to Events</a>
+  
+    <script src="../scripts/create-event.js"></script>
+  </body>
+</html>
