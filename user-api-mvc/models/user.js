@@ -142,7 +142,7 @@ class User {
         console.log(refreshToken);
         
         // this.refreshTokens.push(refreshToken);
-        return {accessToken, refreshToken};
+        return {"access":accessToken,"refresh": refreshToken};
       };
     }
     catch (err){
