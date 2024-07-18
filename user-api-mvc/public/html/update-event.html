@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Event</title>
+</head>
+<body>
+    <form id="eventForm">
+        <label for="event-name">Event Name:</label>
+        <input type="text" id="event-name" name="event-name" required />
+        <label for="event-date">Event Date:</label>
+        <input type="date" id="event-date" name="event-date" required />
+        <label for="event-start-time">Event Start Time:</label>
+        <input type="time" id="event-start-time" name="event-start-time" required />
+        <label for="event-end-time">Event End Time:</label>
+        <input type="time" id="event-end-time" name="event-end-time" required />
+        <label for="event-description">Event Description:</label>
+        <input type="text" id="event-description" name="event-description" required />
+        <label for="event-price">Event Price:</label>
+        <input type="number" id="event-price" name="event-price" />
+        <button type="submit">Update Event</button>
+    </form>
+
+    <a href="event-index.html">Back to Events</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Get the event ID from the URL
+            function getEventIdFromUrl() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('id');
+            }
+
+            const eventId = getEventIdFromUrl();
+
+            // Fetch existing event data and populate the form
+            async function fetchEventById(eventId) {
+                try {
+                    const response = await fetch(`/events/${eventId}`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    const event = await response.json();
+                    populateForm(event);
+                } catch (error) {
+                    console.error('Failed to fetch event:', error);
+                }
+            }
+
+            function populateForm(event) {
+                document.getElementById('event-name').value = event.EventName;
+                document.getElementById('event-date').value = event.EventStartTime.substr(0,10);
+                document.getElementById('event-start-time').value = event.EventStartTime.substr(11,12);
+                document.getElementById('event-end-time').value = event.EventEndTime.substr(11,12);
+                document.getElementById('event-description').value = event.EventDesc;
+                document.getElementById('event-price').value = event.EntryPrice;
+            }
+
+            fetchEventById(eventId);
+
+            // Handle form submission to update the event
+            document.getElementById('eventForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const formData = {
+                    EventName: document.getElementById('event-name').value,
+                    EventDate: document.getElementById('event-date').value,
+                    EventStartTime: document.getElementById('event-start-time').value,
+                    EventEndTime: document.getElementById('event-end-time').value,
+                    EventDesc: document.getElementById('event-description').value,
+                    EntryPrice: document.getElementById('event-price').value,
+                    HostID: 3
+                };
+
+                try {
+                    const response = await fetch(`/events/${eventId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    alert('Event updated successfully');
+                    window.location.href = '/html/display-event.html?id=' + eventId;
+                } catch (error) {
+                    console.error('Failed to update event:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
