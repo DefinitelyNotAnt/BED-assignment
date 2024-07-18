@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="../node_modules/popups/css/popupS.css">
     <title>Sign In</title>
 </head>
 <body>
@@ -15,13 +16,13 @@
             </div>
             <div class="flexBox">
                 <label class="inputLabel padItem">Username</label>
-                <input type="text" name="username" value="username">
+                <input type="text" name="username" value="">
                 <label class="inputLabel padItem">Password</label>
-                <input type="password" name="password" value="password">
+                <input type="password" name="password" value="">
                 <div id="forgetPassword" class="padItem"><a href="::blank">Forgot Password?</a></div>
                 <div class="buttons">
                     <button id="regNew" class="finalPress"><a href="./html/regUser.html">Register an account</a></button>
-                    <button id="signNext" class="finalPress" value="submit" type="submit">Sign In</button>
+                    <button id="signNext" class="finalPress" value="submit" type="submit" onclick="fetchUserSession()">Sign In</button>
                 </div>
             </div>
         </fieldset>

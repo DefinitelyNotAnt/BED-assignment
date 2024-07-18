@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reg.css">
-    <title>Register New User</title>
+    <title>Update User</title>
 </head>
 <body>
     <form id="mainSection" action="http://localhost:3000/users" method="POST">
         <div class="flexBox">
-            <h1 id="signIn">Create Account</h1>
-            <h2 id="signInDescription">Register a new user with us!</h2>
+            <h1 id="signIn">Update Account</h1>
+            <h2 id="signInDescription">You are updating your user profile</h2>
         </div>
-        <form class="flexBox">
-            <div id="createUser" class="inputLabel padItem"><div>Enter new Username</div></div>
-            <input type="text" name="username">
+        <div class="flexBox">
+            <label id="createUser" class="inputLabel padItem">Username</label>
+            <input type="text" name="username" id="username">
             <label class="inputLabel padItem">Enter backup email</label>
             <input type="email" name="email">
             <label class="inputLabel padItem">Create a Password</label>
             <input type="password" name="password">
-            <div id="confirmLabel" class="inputLabel padItem"><div>Confirm Password</div></div>
+            <label id="confirmLabel" class="inputLabel padItem">Confirm Password</label>
             <input type="password" name="confirmPassword">
             <div class="buttons">
                 <button id="signNext" class="finalPress" value="submit">Create Account</button>

@@ -1,3 +1,4 @@
+const { error } = require("console");
 const { user } = require("../dbConfig");
 const User = require("../models/user");
 
@@ -60,12 +61,12 @@ const createUser = async (req, res) => {
     const createdUser = await User.createUser(newUser);
     if (createUser == "User Taken"){
       console.log("User taken");
-      
+
     }
     res.status(201).json(createdUser);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error creating user");
+    console.log("Error 500: Error creating user");
   }
 };
 
@@ -88,17 +89,22 @@ const loginUser = async (req,res) => {
   const username = req.body.username;
   const password = req.body.password;
   try{
-    const {accessToken,refreshToken} = await User.loginUser(username, password);
-    if (accessToken == null) {
-      return res.status(404).send("Failed to log in.");
+    const tokens = await User.loginUser(username, password);
+    if (tokens == null) {
+      res.status(404).send("Failed to log in.");
+      return error;
     }
     else{
-      return res.json({accessToken,refreshToken});
+      return res.json({
+        "accessToken": tokens.access,
+        "refreshToken": tokens.refresh
+      });
     }
   }
   catch(error){
     console.error(error);
-    res.status(500).send("Error logging in.");
+    console.log("Error 500: Error logging in");
+    return "500: Error logging in";
       // const getConfirm = document.getElementById("confirmLabel");
       // if (getConfirm.childElementCount < 2){
       //     const incorrect = document.createElement("div");
