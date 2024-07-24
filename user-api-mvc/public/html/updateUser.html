@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/reg.css">
+    <link rel="stylesheet" href="../styles/updateUser.css">
     <title>Update User</title>
 </head>
 <body>
-    <form id="mainSection" action="http://localhost:3000/users" method="POST">
+    <form id="updateForm" action="http://localhost:3000/users" method="POST">
         <div class="flexBox">
             <h1 id="signIn">Update Account</h1>
             <h2 id="signInDescription">You are updating your user profile</h2>
+            <h3 id="userId">Your user id: </h3>
         </div>
         <div class="flexBox">
             <label id="createUser" class="inputLabel padItem">Username</label>
             <input type="text" name="username" id="username">
-            <label class="inputLabel padItem">Enter backup email</label>
-            <input type="email" name="email">
-            <label class="inputLabel padItem">Create a Password</label>
-            <input type="password" name="password">
-            <label id="confirmLabel" class="inputLabel padItem">Confirm Password</label>
-            <input type="password" name="confirmPassword">
+            <label class="inputLabel padItem">Backup Email</label>
+            <input type="email" name="email" id="email">
+            <label class="inputLabel padItem">Enter Old Password</label>
+            <input type="password" name="password" id="oldPassword">
+            <label class="inputLabel padItem">Enter New Password</label>
+            <input type="password" name="password" id="newPassword">
+            <label id="confirmLabel" class="inputLabel padItem">Confirm New Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword">
             <div class="buttons">
-                <button id="signNext" class="finalPress" value="submit">Create Account</button>
+                <button id="signNext" class="finalPress" value="submit">Update Information</button>
+                <button id="deleteUser" class="finalPress" onclick="deleteCheck()">Delete User</button>
             </div>
         </div>
     </section>
-    <script src="../scripts/reg.js"></script>
+    <script src="../scripts/updateUser.js"></script>
 </body>
 </html>

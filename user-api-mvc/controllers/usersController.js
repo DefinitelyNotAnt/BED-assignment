@@ -1,6 +1,9 @@
+require('dotenv').config();
 const { error } = require("console");
 const { user } = require("../dbConfig");
 const User = require("../models/user");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 // const getUserByName = async (req, res) => {
 //     const userName = parseInt(req.params.loginName);
@@ -15,6 +18,8 @@ const User = require("../models/user");
 //       res.status(500).send("Error retrieving user");
 //     }
 //   };
+
+
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.getAllUsers();
@@ -26,7 +31,17 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const userId = parseInt(req.params.userId);
+  var authheader = req.headers.authorization;
+  const bearerToken = authheader.split(' ')[1];
+  var userId;
+  
+  jwt.verify(bearerToken, process.env.REFRESH_TOKEN_SECRET, (err, decodedToken) => {
+    if (err) {
+      console.error('Token verification failed');
+    } else {
+      // console.log('Decoded token:', decodedToken);
+      userId = decodedToken.userid;
+    }})
   try {
     const user = await User.getUserById(userId);
     if (!user) {
@@ -40,10 +55,12 @@ const getUserById = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const userId = req.query.userId;
-  const newUserData = req.query;
+  const userId = req.body.userId;
+  const newUserData = req.body.userData;
+  const oldPassword = req.body.oldPassword;
+  // console.log(oldPassword);
   try {
-    const updatedUser = await User.updateUser(userId, newUserData);
+    const updatedUser = await User.updateUser(userId, newUserData, oldPassword);
     if (!updatedUser) {
       return res.status(404).send("User not found");
     }
@@ -71,14 +88,14 @@ const createUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  console.log(req.query.userId);
-  const userId = req.query.userId;
+  console.log(req.body.userid);
+  const userId = req.body.userid;
   try {
     const success = await User.deleteUser(userId);
     if (!success) {
       return res.status(404).send("User not found");
     }
-    res.status(204).send();
+    return "Success";
   } catch (error) {
     console.error(error);
     res.status(500).send("Error deleting user");
@@ -86,18 +103,25 @@ const deleteUser = async (req, res) => {
 };
 
 const loginUser = async (req,res) => {
+  console.log("logging:")
   const username = req.body.username;
   const password = req.body.password;
   try{
     const tokens = await User.loginUser(username, password);
+    console.log(tokens);
     if (tokens == null) {
       res.status(404).send("Failed to log in.");
       return error;
     }
     else{
+      console.log(tokens.refresh);
+      res.cookie("jwt", tokens.refresh, {
+        sameSite: 'None', 
+        secure: true,
+        maxAge: 24 * 60 * 60 * 1000
+      })
       return res.json({
-        "accessToken": tokens.access,
-        "refreshToken": tokens.refresh
+        "accessToken": tokens.access
       });
     }
   }
