@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', async () =>
 
         if (response.ok) {
             alert('Place deleted successfully');
-            window.location.href = '/places.html'; 
+            window.location.href = '/html/places.html'; 
         } else {
             alert('Failed to delete place');
         }
     });
 
     document.getElementById('cancelDelete').addEventListener('click', () => {
-        window.location.href = '/places.html';
+        window.location.href = '/html/places.html';
     });
 });

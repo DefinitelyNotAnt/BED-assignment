@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response.ok) 
         {
             alert('Place updated successfully');
-            window.location.href = '/places.html';
+            window.location.href = '/html/places.html';
         } 
         else 
         {

@@ -25,11 +25,11 @@ async function fetchPlaces()
   
       const updateLink = document.createElement("a");
       updateLink.textContent = "Update    ";
-      updateLink.href = `http://localhost:3001/updateplace.html?id=${place.id}`;
+      updateLink.href = `http://localhost:3001/html/updateplace.html?id=${place.id}`;
 
       const deleteLink = document.createElement("a");
       deleteLink.textContent = "Delete";
-      deleteLink.href = `http://localhost:3001/deleteplace.html?id=${place.id}`;
+      deleteLink.href = `http://localhost:3001/html/deleteplace.html?id=${place.id}`;
 
       // ... add more elements for other book data (optional)
   
