@@ -38,6 +38,15 @@ CREATE TABLE Events (
 -- ===================================  Places  =========================================
 -- ======================================================================================
 
+CREATE TABLE Places (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE,
+  description VARCHAR(1500) NOT NULL UNIQUE, 
+  operatinghours VARCHAR(100) NOT NULL,
+  address VARCHAR(1000) NOT NULL UNIQUE
+);
+
+
 INSERT INTO Places (name, description, operatinghours, address)
 VALUES
 ('Old Folks Club', 'It offers events for the elderly to bond together', '9am - 9pm', 'Woodlands Avenue 4'),
