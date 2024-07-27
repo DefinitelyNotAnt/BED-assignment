@@ -5,10 +5,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const sql = require("mssql");
 const dbConfig = require("./dbConfig");
-const jwt = require("jsonwebtoken");
 const { name } = require('body-parser');
-const bcrypt = require("bcrypt");
 const usersController = require("./controllers/usersController");
+const profilesController = require("./controllers/userProfileController");
 const validateUsers = require("./middlewares/validateUser");
 const cookieParser = require('cookie-parser');
 
@@ -28,6 +27,9 @@ let refreshTokens = [];
 app.post("/users", validateUsers.validateCreateUser, usersController.createUser); // Create user
 app.get("/users", usersController.getAllUsers); // Get all users
 app.get("/users/id", usersController.getUserById); // Get user by ID
+app.post("/profiles", profilesController.createProfile); // Create user
+app.get("/profiles", profilesController.getProfileById); // Get user profile by ID
+app.put("/profiles", profilesController.updateProfile); // Update user
 app.put("/users", validateUsers.validateCreateUser, usersController.updateUser); // Update user
 app.delete("/users", usersController.deleteUser); // Delete user
 

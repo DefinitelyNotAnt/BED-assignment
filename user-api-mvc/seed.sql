@@ -13,9 +13,9 @@ CREATE TABLE Users
 	   Access CHAR(1) NOT NULL,
     CONSTRAINT [PK_User_UserID] PRIMARY KEY CLUSTERED (UserID ASC)
 )
-CREATE TABLE IF NOT EXISTS UserProfile
+CREATE TABLE UserProfiles
 (
-    ProfilePic NVARCHAR(64) NULL,
+    ProfilePic NVARCHAR(512) NULL,
     UserID INT NOT NULL PRIMARY KEY, -- must keep this
     UserDesc NVARCHAR(800) NULL,
     CONSTRAINT FK_UserProfile_UserID FOREIGN KEY (UserID) REFERENCES Users(UserID)

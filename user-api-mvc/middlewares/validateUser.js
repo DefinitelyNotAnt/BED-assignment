@@ -15,6 +15,8 @@ const validateUser = (req, res, next) => {
     
     next(); // If validation passes, proceed to the next route handler
   };
+
+  
 const validateCreateUser = (req, res, next) => {
   const schema = Joi.object({
     username: Joi.string().min(3).max(50).required(),

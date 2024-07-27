@@ -4,6 +4,7 @@ const { user } = require("../dbConfig");
 const User = require("../models/user");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const UserProfile = require("../models/userProfile");
 
 // const getUserByName = async (req, res) => {
 //     const userName = parseInt(req.params.loginName);
@@ -91,6 +92,10 @@ const deleteUser = async (req, res) => {
   console.log(req.body.userid);
   const userId = req.body.userid;
   try {
+    const step1success = await UserProfile.deleteProfile(userId);
+    if (!step1success){
+      return res.status(404).send("User not found");
+    }
     const success = await User.deleteUser(userId);
     if (!success) {
       return res.status(404).send("User not found");
