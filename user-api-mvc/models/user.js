@@ -66,13 +66,14 @@ class User {
       : null; // Handle user not found
   }
   // Update User
-  static async updateUser(id, newUserData, oldPassword) {
-    console.log(newUserData);
+  static async updateUser(id, userData, oldPassword) {
+    console.log(id);
+    console.log("Updating");
     // Hash new password + Add hashing time per request 
-    if (newUserData == undefined){
+    if (userData == undefined){
       return null;
     }
-    const hashedPassword = await bcrypt.hash(newUserData.password, 10);
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
     // Connect DB
     const connection = await sql.connect(dbConfig);
     // Check for user data
@@ -86,6 +87,7 @@ class User {
     // Check if the old password is correct
     if (!await bcrypt.compare(oldPassword, checkResult.recordset[0].PasswordHash)){
       // End function
+      connection.close();
       return null;
     }
 
@@ -93,9 +95,9 @@ class User {
     const sqlQuery = `UPDATE Users SET LoginName = @loginName, PasswordHash = @hashedPassword, Email = @email WHERE UserID = @id`; // Parameterized query
 
     request.input("id", id);
-    request.input("loginName", newUserData.username); 
+    request.input("loginName", userData.username); 
     request.input("hashedPassword", hashedPassword);
-    request.input("email", newUserData.email || null); // Handle removing email
+    request.input("email", userData.email || null); // Handle removing email
     console.log(sqlQuery);
     // Send request
     await request.query(sqlQuery);

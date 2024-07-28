@@ -44,8 +44,8 @@ const getUserById = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const userId = req.body.userId;
-  const newUserData = req.body.userData;
+  const userId = req.body.userid;
+  const newUserData = req.body.newUserData;
   const oldPassword = req.body.oldPassword;
   // console.log(oldPassword);
   try {

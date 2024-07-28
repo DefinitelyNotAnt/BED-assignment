@@ -137,15 +137,18 @@ function loadProfile(){
             }
             // Gather form data
             const loginData = {
-                "userId": userId,
-                "userData": {
+                "userid": userId,
+                "newUserData": {
                     "username": username.value,
                     "password": newPassword.value,
+                    "confirmPassword": confirmPassword.value,
                     "email": email.value
                 },
                 "oldPassword": oldPassword.value
             };
-            
+            if (newPassword.value == ''){
+                loginData.userData.password = oldPassword.value;
+            }
             console.log("logindata: "+loginData);
             // Send the form data using Fetch API
             fetch('http://localhost:3000/users', {

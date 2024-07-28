@@ -48,7 +48,7 @@ app.get("/users/id", usersController.getUserById); // Get user by ID
 app.post("/profiles", profilesController.createProfile); // Create user
 app.get("/profiles", profilesController.getProfileById); // Get user profile by ID
 app.put("/profiles", profilesController.updateProfile); // Update user
-app.put("/users", validateUsers.validateCreateUser, usersController.updateUser); // Update user
+app.put("/users", validateUsers.validateUpdateUser, usersController.updateUser); // Update user
 app.delete("/users", usersController.deleteUser); // Delete user
 app.post("/users/forgot", usersController.searchUsers); // Search email for user to reset password
 
