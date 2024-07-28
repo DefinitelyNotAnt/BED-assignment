@@ -15,14 +15,18 @@ const validateUser = (req, res, next) => {
     
     next(); // If validation passes, proceed to the next route handler
   };
+
+  
 const validateCreateUser = (req, res, next) => {
   const schema = Joi.object({
     username: Joi.string().min(3).max(50).required(),
     password: Joi.string().min(8).max(50).required(),
+    confirmPassword: Joi.string().min(8).max(50).required(),
     email: Joi.string().min(3).email()
   });
-  const validation = schema.validate(req.body.userData, { abortEarly: true }); // Validate request body
+  const validation = schema.validate(req.body, { abortEarly: true }); // Validate request body
     console.log("Check finished");
+    console.log(validation);
     if (validation.error) {
       const errors = validation.error.details.map((error) => error.message);
       res.status(400).json({ message: "Validation error", errors });

@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/reg.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
     <title>Register New User</title>
 </head>
 <body>
+    <div id="returnbtn" class="finalPress">Back</div>
     <form id="regForm" action="http://localhost:3000/users" method="POST">
         <div class="flexBox">
-            <h1 id="signIn">Create Account</h1>
-            <h2 id="signInDescription">Register a new user with us!</h2>
+            <h2 id="registerDescription">Registering User</h2>
+            <section id="iconNameDesc">
+                <img src="../media/defaultIcon.png" id="displayIcon">
+                <div id="displayName">Sign up with Us!</div>
+            </section>
         </div>
         <div class="flexBox">
             <label id="createUser" class="inputLabel padItem">Enter new Username</label>

@@ -1,89 +1,210 @@
-body{
-    background-image: url("../media/signInBg.jpg");
-    background-size: cover; /* Resize the background image to cover the entire container */
-}
-
-#regForm{
-    position: absolute;
-    width: 75vw;
-    height: 50vh;
-    border-color: black;
-    border: solid 0.3em;
-    border-radius: 50px;
-    padding: 5vh 5vw 5vh 5vw;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #00cec9;
+    --background-color: #2d3436;
+    --surface-color: #34495e;
+    --text-color: #ecf0f1;
+    --error-color: #d63031;
+    --success-color: #00b894;
+  }
+  
+  body {
+    font-family: 'inconsolata', 'Roboto', 'Arial', sans-serif;
+    background: url("../media/image.png");
+    background-size: cover;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    align-self: center;
+  }
+  .flexBox {
     display: flex;
-    flex-direction: row;
-    background-color: rgba(240, 240, 255, 0.8);
-}
-#signIn{
-    position: relative;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 3vw;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-#signInDescription{
-    position: relative;
-    padding-top: 5vh;
-    top: 15%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.flexBox{
-    display: flex;
-    width: 50%;
     flex-direction: column;
-}
-.padItem{
-    padding-top: 2.5vh;
-}
-.inputLabel{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-input{
-    height: min(30px, 10vh);
-}
-.finalPress{
-    position: relative;
-    top: 0%;
-    left: 0%;
-    padding: 10px 10px 10px 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    height: max-content;
-    width: max-content;
-    margin-left: 5vw;
-    background-color: rgb(255, 255, 255);
-}
-.finalPress a{
-    color: #474747;
-    display: block;
-}
-.buttons{
-    position: absolute;
-    bottom: 10vh;
-    right: 5vw;
-}
-#regNew{
-    background-color: #abffa3;
-}
-#signNext{
-    background-color: blue;
-    padding: 10px 20px 10px 20px;
-}
-#signNext a{
-    color: aliceblue;
-}
-a{
-    text-decoration: none;
-    height: 100%;
+    align-items: center;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .flexBox:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  h1, h2, h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  h1 {
+    color: var(--primary-color);
+    font-size: 50px;
+    font-weight: bolder;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  h2 {
+    color: var(--secondary-color);
+    font-size: 30px;
+    font-weight: 500;
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+  
+  input {
     width: 100%;
-    box-sizing: border-box
-}
-.incorrect{
-    color: red;
-}
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-color);
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  button, #deleteUser, .finalPress {
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover, #deleteUser:hover, .finalPress:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  button:active, #deleteUser:active, .finalPress:active {
+    transform: translateY(0);
+  }
+  
+  button:first-child, #deleteUser:first-child, .finalPress:first-child {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  button:last-child, #deleteUser:last-child, .finalPress:last-child {
+    background-color: var(--error-color);
+    color: white;
+  }
+  
+  #userId {
+    font-weight: bold;
+    color: var(--secondary-color);
+  }
+  
+  #changeIcon{
+    font-weight: bold;
+    color: #a7a7a7;
+  }
+  
+  #displayName{
+    font-size: 32px;
+    font-weight: 500;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  /* Animations  */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+  }
+  
+  input:invalid {
+    animation: shake 0.5s ease-in-out;
+    box-shadow: 0 0 0 2px var(--error-color);
+  }
+  
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../media/image.png");
+    background-size: cover;
+    z-index: -1;
+  }
+  
+  button, #deleteUser, .finalPress {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  button::after, #deleteUser::after, .finalPress::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  button:hover::after, #deleteUser:hover::after, .finalPress:hover::after {
+    opacity: 1;
+  }
+
+  #iconNameDesc{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  #displayDescription{
+    padding-top: 15px;
+    max-width: 500px;
+    overflow-wrap: break-word;
+    height: fit-content;
+  }
+
+  #returnbtn{
+    margin: 15px 15px 15px 15px;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background-color: #34495e;
+  }

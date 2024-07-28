@@ -69,6 +69,9 @@ class User {
   static async updateUser(id, newUserData, oldPassword) {
     console.log(newUserData);
     // Hash new password + Add hashing time per request 
+    if (newUserData == undefined){
+      return null;
+    }
     const hashedPassword = await bcrypt.hash(newUserData.password, 10);
     // Connect DB
     const connection = await sql.connect(dbConfig);
@@ -133,7 +136,7 @@ class User {
       // Close connection
       connection.close();
       // Retrieve the newly created User using its ID
-      return this.getUserById(result.recordset[0].id);
+      return this.getUserById(result.recordset[0].UserID);
     }
     // Close connection in case user creation failed
     connection.close();

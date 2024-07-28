@@ -4,18 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/updateUser.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
     <title>Update User</title>
 </head>
 <body>
+    <div id="return" class="finalPress">Back</div>
     <form id="updateForm" action="http://localhost:3000/users" method="POST">
         <div class="flexBox">
-            <h1 id="signIn">Update Account</h1>
             <h2 id="signInDescription">You are updating your user profile</h2>
+            <section id="iconNameDesc">
+                <img src="../media/defaultIcon.png" id="displayIcon">
+                <div id="displayName">User</div>
+                <div id="displayDescription">Generic Description here.</div>
+            </section>
             <h3 id="userId">Your user id: </h3>
+            <div id="logout" class="finalPress">Logout</div>
         </div>
         <div class="flexBox">
             <label id="createUser" class="inputLabel padItem">Username</label>
             <input type="text" name="username" id="username">
+            <label id="changeIcon" class="inputLabel padItem">Icon URL</label>
+            <input type="text" name="iconUrl" id="iconUrl" value="">
+            <label id="changeDesc" class="inputLabel padItem">Description</label>
+            <input type="text" name="description" id="description" value="">
             <label class="inputLabel padItem">Backup Email</label>
             <input type="email" name="email" id="email">
             <label class="inputLabel padItem">Enter Old Password</label>
@@ -24,12 +37,36 @@
             <input type="password" name="password" id="newPassword">
             <label id="confirmLabel" class="inputLabel padItem">Confirm New Password</label>
             <input type="password" name="confirmPassword" id="confirmPassword">
-            <div class="buttons">
+            <div class="buttons">   
+                <button id="changeIcon" onclick="changeIcon()">Change Icon</button>
                 <button id="signNext" class="finalPress" value="submit">Update Information</button>
-                <button id="deleteUser" class="finalPress" onclick="deleteCheck()">Delete User</button>
+                <div id="deleteUser" class="finalPress" onclick="deleteCheck()">Delete User</div>
             </div>
         </div>
-    </section>
     <script src="../scripts/updateUser.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const text = "UPDATE PROFILE";
+            const container = document.getElementById('animated-text');
+            
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.className = 'letter';
+                span.textContent = char;
+                container.appendChild(span);
+            });
+            
+            function OoOo() {
+                const letters = document.querySelectorAll('.letter');
+                letters.forEach((letter, index) => {
+                    const offset = Math.sin(Date.now() * 0.005 + index * 0.3) * 10;
+                    letter.style.transform = `translateY(${offset}px)`;
+                });
+                requestAnimationFrame(OoOo);
+            }
+            
+            OoOo();
+        });
+        </script>
 </body>
 </html>
