@@ -1,18 +1,35 @@
 require('dotenv').config();
 
+// Basic items
 const express = require("express");
 const bodyParser = require("body-parser");
-const app = express();
-const sql = require("mssql");
-const dbConfig = require("./dbConfig");
 const { name } = require('body-parser');
-const usersController = require("./controllers/usersController");
-const profilesController = require("./controllers/userProfileController");
-const validateUsers = require("./middlewares/validateUser");
+const sql = require("mssql");
 const cookieParser = require('cookie-parser');
 
+
+ // Dbconfig
+ // Change to self config using the SQL in seed.sql
+const dbConfig = require("./dbConfig");
+
+
+// Controllers
+const usersController = require("./controllers/usersController");
+const profilesController = require("./controllers/userProfileController");
+const placesController = require("./controllers/placesController");
+const eventsController = require("./controllers/eventsController");
+
+
+// Middlewares
+const validatePlaces = require("./middlewares/validatePlaces");
+const validateUsers = require("./middlewares/validateUser");
+const validateEvent = require("./middlewares/validateEvent");
+
+
 const port = process.env.PORT || 3000; // Use environment variable or default port
+const app = express();
 const staticMiddleware = express.static("public");
+
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
@@ -24,6 +41,7 @@ app.use(staticMiddleware); // Mount the static middleware
 
 let refreshTokens = [];
 
+// Users routes
 app.post("/users", validateUsers.validateCreateUser, usersController.createUser); // Create user
 app.get("/users", usersController.getAllUsers); // Get all users
 app.get("/users/id", usersController.getUserById); // Get user by ID
@@ -32,6 +50,26 @@ app.get("/profiles", profilesController.getProfileById); // Get user profile by 
 app.put("/profiles", profilesController.updateProfile); // Update user
 app.put("/users", validateUsers.validateCreateUser, usersController.updateUser); // Update user
 app.delete("/users", usersController.deleteUser); // Delete user
+app.post("/users/forgot", usersController.searchUsers); // Search email for user to reset password
+
+// Places routes
+app.get("/places", placesController.getAllPlaces);
+app.get("/places/:id", placesController.getPlaceById);//places/:id: This route with a dynamic parameter :id maps to the getBookById function. The controller function will extract the ID from the request parameters and use it to retrieve the corresponding book record.
+
+app.post("/places", validatePlaces, placesController.createPlace); // POST for creating books (can handle JSON data)
+app.put("/places/:id", validatePlaces, placesController.updatePlace); // Add validateBook before updateBook
+app.delete("/places/:id", placesController.deletePlace); // DELETE for deleting books and defines a route that can handle DELETE request
+
+
+// Events routes
+// Routes for GET requests (replace with appropriate routes for update and delete later)
+app.get("/events", eventsController.getAllEvents);
+app.get("/events/:id", eventsController.getEventById);
+app.post("/events", validateEvent, eventsController.createEvent); // POST for creating events (can handle JSON data)
+app.put("/events/:id", eventsController.updateEvent); // PUT for updating events
+app.delete("/events/:id", eventsController.deleteEvent); // DELETE for deleting events
+
+
 
 // app.post('/token', (req, res) => {
 //     const refreshToken = req.body.token;

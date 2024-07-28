@@ -44,29 +44,6 @@
             </div>
         </div>
     <script src="../scripts/updateUser.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const text = "UPDATE PROFILE";
-            const container = document.getElementById('animated-text');
-            
-            text.split('').forEach((char, index) => {
-                const span = document.createElement('span');
-                span.className = 'letter';
-                span.textContent = char;
-                container.appendChild(span);
-            });
-            
-            function OoOo() {
-                const letters = document.querySelectorAll('.letter');
-                letters.forEach((letter, index) => {
-                    const offset = Math.sin(Date.now() * 0.005 + index * 0.3) * 10;
-                    letter.style.transform = `translateY(${offset}px)`;
-                });
-                requestAnimationFrame(OoOo);
-            }
-            
-            OoOo();
-        });
-        </script>
+    
 </body>
 </html>

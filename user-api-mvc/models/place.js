@@ -1,5 +1,5 @@
 const sql = require("mssql");
-const database = require("../database");
+const database = require("../dbConfig");
 
 
 class Place 

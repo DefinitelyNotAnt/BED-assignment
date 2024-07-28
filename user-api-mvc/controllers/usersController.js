@@ -5,20 +5,8 @@ const User = require("../models/user");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const UserProfile = require("../models/userProfile");
+var nodemailer = require('nodemailer');
 
-// const getUserByName = async (req, res) => {
-//     const userName = parseInt(req.params.loginName);
-//     try {
-//       const user = await User.getUserById(userName);
-//       if (!user) {
-//         return res.status(404).send("User not found");
-//       }
-//       res.json(user);
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).send("Error retrieving user");
-//     }
-//   };
 
 
 const getAllUsers = async (req, res) => {
@@ -143,18 +131,64 @@ const loginUser = async (req,res) => {
       // }
   }
 }
+const resetPassword = async (req, res) => {
+    try {
+      const getUser = await User.createUser(newUser);
+      if (createUser == "User Taken"){
+        console.log("User taken");
+  
+      }
+      res.status(201).json(createdUser);
+    } catch (error) {
+      console.error(error);
+      console.log("Error 500: Error creating user");
+    }
+}
 
-// async function searchUsers(req, res) {
-//   const searchTerm = req.query.searchTerm; // Extract search term from query params
+async function searchUsers(req, res) {
+  console.log("WHY ISNT IT CHANGING");
+  const searchTerm = req.body.searchTerms; // Extract search term from query params
+  console.log(req.body);
+  try {    
+    const users = await User.searchUsers(searchTerm);
+    const OTP = Math.floor(Math.random()*999999);
+    const otpString = String(OTP).padStart(6, '0');
+    console.log(otpString);
+    var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'noreply.resetpassauthenticator@gmail.com',
+        pass: '123noreplyBusiness098'
+      }
+    }); 
 
-//   try {    
-//     const users = await User.searchUsers(searchTerm);
-//     res.json(users);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Error searching users" });
-//   }
-// }
+    var mailOptions = {
+      from: 'noreply.resetpassauthenticator@gmail.com',
+      to: users.Email,
+      subject: 'Password reset',
+      text: 'Your OTP is: ' + otpString
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+    
+    console.log(users)
+    var returnData = {
+      "userid": users.UserId,
+      "otp": otpString,
+      "password": users.PasswordHash
+    }
+    res.json(returnData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error searching users" });
+  }
+}
 
   module.exports = {
     // getUserByName
@@ -163,6 +197,7 @@ const loginUser = async (req,res) => {
     getUserById,
     updateUser,
     deleteUser,
-    loginUser
-    // searchUsers
+    loginUser,
+    resetPassword,
+    searchUsers
   };

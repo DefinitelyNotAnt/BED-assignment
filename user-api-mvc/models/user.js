@@ -225,25 +225,27 @@ class User {
     })
   }
 
-  // static async searchUsers(searchTerm) {
-  //   const connection = await sql.connect(dbConfig);
+  static async searchUsers(searchTerm) {
+    const connection = await sql.connect(dbConfig);
 
-  //   try {
-  //     const query = `
-  //       SELECT *
-  //       FROM Users
-  //       WHERE LoginName LIKE '%${searchTerm}%'
-  //         OR email LIKE '%${searchTerm}%'
-  //     `;
+    try {
+      const query = `
+        SELECT *
+        FROM Users
+        WHERE LoginName LIKE '%${searchTerm}%'
+          OR email LIKE '%${searchTerm}%'
+      `;
 
-  //     const result = await connection.request().query(query);
-  //     return result.recordset;
-  //   } catch (error) {
-  //     throw new Error("Error searching users"); // Or handle error differently
-  //   } finally {
-  //     await connection.close(); // Close connection even on errors
-  //   }
-  // }
+      const result = await connection.request().query(query);
+      console.log("query thru");
+      console.log(result.recordset[0].UserID);
+      return this.getUserById(result.recordset[0].UserID);
+    } catch (error) {
+      throw new Error("Error searching users"); // Or handle error differently
+    } finally {
+      await connection.close(); // Close connection even on errors
+    }
+  }
   // static async getUserByName(loginName,password) {
   //   const connection = await sql.connect(dbConfig);
 

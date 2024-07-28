@@ -37,3 +37,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 function regUser(){
     window.location.href = `http://localhost:3000/html/regUser.html`;
 }
+
+
+document.getElementById('forgetPassword').addEventListener("click", function (e) {
+    window.location.href = `http://localhost:3000/html/forgotPassword.html`;
+});
