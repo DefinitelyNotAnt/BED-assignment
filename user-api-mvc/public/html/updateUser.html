@@ -10,17 +10,17 @@
     <title>Update User</title>
 </head>
 <body>
+    <div id="return" class="finalPress">Back</div>
     <form id="updateForm" action="http://localhost:3000/users" method="POST">
         <div class="flexBox">
-            <div class="container">
-                <h1 id="animated-text"></h1>
-            </div>
             <h2 id="signInDescription">You are updating your user profile</h2>
             <section id="iconNameDesc">
                 <img src="../media/defaultIcon.png" id="displayIcon">
+                <div id="displayName">User</div>
                 <div id="displayDescription">Generic Description here.</div>
             </section>
             <h3 id="userId">Your user id: </h3>
+            <div id="logout" class="finalPress">Logout</div>
         </div>
         <div class="flexBox">
             <label id="createUser" class="inputLabel padItem">Username</label>
@@ -37,16 +37,14 @@
             <input type="password" name="password" id="newPassword">
             <label id="confirmLabel" class="inputLabel padItem">Confirm New Password</label>
             <input type="password" name="confirmPassword" id="confirmPassword">
-            <div class="buttons">
+            <div class="buttons">   
                 <button id="changeIcon" onclick="changeIcon()">Change Icon</button>
                 <button id="signNext" class="finalPress" value="submit">Update Information</button>
                 <div id="deleteUser" class="finalPress" onclick="deleteCheck()">Delete User</div>
             </div>
         </div>
-    </section>
     <script src="../scripts/updateUser.js"></script>
     <script>
-        // delete this if udw its there for fun
         document.addEventListener('DOMContentLoaded', (event) => {
             const text = "UPDATE PROFILE";
             const container = document.getElementById('animated-text');

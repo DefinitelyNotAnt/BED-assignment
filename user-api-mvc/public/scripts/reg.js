@@ -2,6 +2,7 @@
 // ======================  Register Form  ==========================
 // ==============================================================
 var userId;
+const returnbtn = document.getElementById("returnbtn");
 
 document.getElementById('regForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
@@ -75,3 +76,7 @@ const createProfile = (id) => {
         console.error('Error:', error);
     });
 }
+
+returnbtn.addEventListener("click", function (){
+    window.location.href = `http://localhost:3000/index.html`;
+})

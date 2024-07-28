@@ -92,7 +92,7 @@
     margin-top: 1rem;
   }
   
-  button, #deleteUser {
+  button, #deleteUser, .finalPress {
     padding: 1rem 1.5rem;
     border: none;
     border-radius: 8px;
@@ -102,21 +102,21 @@
     transition: all 0.3s ease;
   }
   
-  button:hover, #deleteUser:hover {
+  button:hover, #deleteUser:hover, .finalPress:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
   
-  button:active, #deleteUser:active {
+  button:active, #deleteUser:active, .finalPress:active {
     transform: translateY(0);
   }
   
-  button:first-child, #deleteUser:first-child {
+  button:first-child, #deleteUser:first-child, .finalPress:first-child {
     background-color: var(--primary-color);
     color: white;
   }
   
-  button:last-child, #deleteUser:last-child {
+  button:last-child, #deleteUser:last-child, .finalPress:last-child {
     background-color: var(--error-color);
     color: white;
   }
@@ -131,6 +131,13 @@
     color: #a7a7a7;
   }
   
+  #displayName{
+    font-size: 32px;
+    font-weight: 500;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
   /* Animations  */
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
@@ -159,12 +166,12 @@
     z-index: -1;
   }
   
-  button, #deleteUser {
+  button, #deleteUser, .finalPress {
     position: relative;
     overflow: hidden;
   }
   
-  button::after, #deleteUser::after {
+  button::after, #deleteUser::after, .finalPress::after {
     content: "";
     position: absolute;
     top: -50%;
@@ -176,7 +183,7 @@
     transition: opacity 0.3s ease;
   }
   
-  button:hover::after, #deleteUser:hover::after {
+  button:hover::after, #deleteUser:hover::after, .finalPress:hover::after {
     opacity: 1;
   }
 
@@ -185,6 +192,17 @@
     align-items: center;
     flex-direction: column;
   }
-  #description{
+  #displayDescription{
     padding-top: 15px;
+    max-width: 500px;
+    overflow-wrap: break-word;
+    height: fit-content;
+  }
+
+  #return{
+    margin: 15px 15px 15px 15px;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background-color: #34495e;
   }

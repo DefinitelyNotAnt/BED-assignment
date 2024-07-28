@@ -6,6 +6,7 @@
 // Get boxes
 const userid = document.getElementById("userId");
 const username = document.getElementById("username");
+const displayUsername = document.getElementById("displayName");
 const icon = document.getElementById("iconUrl");
 const displayIcon = document.getElementById("displayIcon");
 const description = document.getElementById("description");
@@ -15,7 +16,10 @@ const oldPassword = document.getElementById("oldPassword")
 const newPassword = document.getElementById("newPassword")
 const confirmPassword = document.getElementById("confirmPassword");
 
-var globalData;
+
+const logout = document.getElementById("logout");
+const returnbtn = document.getElementById("return");
+
 var userId;
 
 
@@ -50,7 +54,7 @@ window.addEventListener("DOMContentLoaded", async ()=> {
         // Handle successful response
         // Testing
         // console.log('Success:', data);
-        globalData = data;
+        displayUsername.innerText = data.loginName;
         username.value = data.loginName;
         email.value = data.email;
         userid.innerText = "Your user id: "+data.userId;
@@ -66,7 +70,7 @@ window.addEventListener("DOMContentLoaded", async ()=> {
     });
     
 
-    function loadProfile(){
+function loadProfile(){
     // Getting Icon and Description
     console.log("ID:"+userId);
     // Get info
@@ -87,17 +91,20 @@ window.addEventListener("DOMContentLoaded", async ()=> {
     .then(data => {
         // Handle successful response
         // Testing
-        // console.log('Success:', data);
-        console.log(data);
+         console.log('Success:', data);
         icon.value = data.userProfile;
-        console.log(data.userProfile);
         description.value = data.userDesc;
         displayDescription.innerHTML = `<div id="displayDescription">${data.userDesc}</div>`;
-        if (data.userProfile != "undefined" && data.userProfile != ""){
-            displayIcon.outerHTML = `<img src="${data.userProfile}" id="displayIcon">`;
+        if (data.userProfile != "undefined" && data.userProfile != "" && data.userProfile != null){
+            try{
+                displayIcon.src = data.userProfile;
+            }
+            catch{
+                displayIcon.src = "../media/defaultIcon.png";
+            }
         }
         else{
-            displayIcon.innerHTML = `<img src="../media/defaultIcon.png" id="displayIcon">`;
+            displayIcon.src = "../media/defaultIcon.png";
         }
     })
     .catch(error => {
@@ -157,8 +164,21 @@ window.addEventListener("DOMContentLoaded", async ()=> {
             .then(data => {
                 // Handle successful response
                 console.log('Success:', data);
+                icon.value = data.userProfile;
+                description.value = data.userDesc;
+                displayDescription.innerHTML = `<div id="displayDescription">${data.userDesc}</div>`;
+                if (data.userProfile != "undefined" && data.userProfile != "" && data.userProfile != null && data.userProfile != "null"){
+                    try{
+                        displayIcon.src = data.userProfile;
+                    }
+                    catch{
+                        displayIcon.src = "../media/defaultIcon.png";
+                    }
+                }
+                else{
+                    displayIcon.src = "../media/defaultIcon.png";
+                }
                 alert('Updated successfully!');
-                loadProfile();
             })
             .catch(error => {
                 // Handle errors
@@ -201,7 +221,21 @@ document.getElementById('updateForm').addEventListener('submit', function(event)
     })
     .then(data => {
         // Handle successful response
-        console.log('Success:', data);
+        displayUsername.innerText = username.value;
+        icon.value = data.userProfile;
+        description.value = data.userDesc;
+        displayDescription.innerHTML = `<div id="displayDescription">${data.userDesc}</div>`;
+        if (data.userProfile != "undefined" && data.userProfile != "" && data.userProfile != null && data.userProfile != "null"){
+            try{
+                displayIcon.src = data.userProfile;
+            }
+            catch{
+                displayIcon.src = "../media/defaultIcon.png";
+            }
+        }
+        else{
+            displayIcon.src = "../media/defaultIcon.png";
+        }
         alert('Updated successfully!');
     })
     .catch(error => {
@@ -260,3 +294,19 @@ function deleteCheck(){
     alert('Deleted user successfully!');
     window.location.href = `http://localhost:3000/index.html`;
 }
+
+// =================================================================================
+// ========================      Logout User     ===================================
+// =================================================================================
+
+
+logout.addEventListener("click", function (event){
+    event.preventDefault();
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    console.log(document.cookie);
+    window.location.href = `http://localhost:3000/index.html`;
+})
+
+returnbtn.addEventListener("click", function (){
+    window.location.href = `http://localhost:3000/index1.html`;
+})
