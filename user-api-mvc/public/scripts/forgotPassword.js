@@ -1,8 +1,11 @@
+const returnbtn = document.getElementById("return");
+
+
 document.addEventListener('DOMContentLoaded', async () => {
     const emailbtn = document.getElementById("sendEmail");
     const terms = document.getElementById("searchTerms");
 
-    emailbtn.addEventListener("submit", function (event) {
+    emailbtn.addEventListener("click", function (event) {
         event.preventDefault();
 
         const searchTerms = {
@@ -10,8 +13,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             "email": terms.value,
             "username": terms.value
         }
-        console.log("QUICK SUPPRESSION");
-        console.log(searchTerms);
         fetch('http://localhost:3000/users/forgot', {
             method: 'POST',
             headers: {
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Handle successful response
             // console.log('Success:', data);
             if (input == data.otp){
-                alert('Confirmation Successful! Your password is: ' + data.password);
+                alert('Confirmation Successful! Your password is: 123123123');
                 window.location.href = `http://localhost:3000/index.html`;
             }
             else{
@@ -44,3 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     })
 });
+
+returnbtn.addEventListener("click", function (){
+    window.location.href = `http://localhost:3000/index.html`;
+})

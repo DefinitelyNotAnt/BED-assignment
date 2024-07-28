@@ -146,9 +146,7 @@ const resetPassword = async (req, res) => {
 }
 
 async function searchUsers(req, res) {
-  console.log("WHY ISNT IT CHANGING");
   const searchTerm = req.body.searchTerms; // Extract search term from query params
-  console.log(req.body);
   try {    
     const users = await User.searchUsers(searchTerm);
     const OTP = Math.floor(Math.random()*999999);
@@ -158,13 +156,13 @@ async function searchUsers(req, res) {
       service: 'gmail',
       auth: {
         user: 'noreply.resetpassauthenticator@gmail.com',
-        pass: '123noreplyBusiness098'
+        pass: 'mizv kmef kciq xhrb'
       }
     }); 
 
     var mailOptions = {
       from: 'noreply.resetpassauthenticator@gmail.com',
-      to: users.Email,
+      to: users.email,
       subject: 'Password reset',
       text: 'Your OTP is: ' + otpString
     };

@@ -239,6 +239,7 @@ class User {
       const result = await connection.request().query(query);
       console.log("query thru");
       console.log(result.recordset[0].UserID);
+      await connection.close();
       return this.getUserById(result.recordset[0].UserID);
     } catch (error) {
       throw new Error("Error searching users"); // Or handle error differently
