@@ -7,7 +7,7 @@ const validatePlaces = require("./middlewares/validatePlaces");
 
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 const staticMiddleware = express.static("public"); //path to the public folder
 

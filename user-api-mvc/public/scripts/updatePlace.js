@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const placeId = urlParams.get('id');
 
     if (placeId) {
-        const response = await fetch(`http://localhost:3001/places/${placeId}`);
+        const response = await fetch(`http://localhost:3000/places/${placeId}`);
         const place = await response.json();
 
         document.getElementById('name').value = place.name;
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             address: document.getElementById('address').value
         };
 
-        const response = await fetch(`http://localhost:3001/places/${placeId}`, {
+        const response = await fetch(`http://localhost:3000/places/${placeId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

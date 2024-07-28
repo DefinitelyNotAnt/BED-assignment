@@ -9,7 +9,7 @@ body{
 .header{
   min-height: 100vh;
   width: 100%;
-  background-image: linear-gradient(rgba(5,7,30,0.7),rgba(4,7,30,0.5)),url(../media/menu.jpg);
+  background-image: linear-gradient(rgba(5,7,30,0.7),rgba(4,7,30,0.5));
   background-position: center;
   background-size: cover;
   position: relative;
@@ -110,3 +110,12 @@ form input, form textarea
   font-size: 16px;
 }
 
+.link-container {
+  display: flex;
+  gap: 310px; 
+}
+
+.link {
+  text-decoration: none;
+  color: blue; 
+}

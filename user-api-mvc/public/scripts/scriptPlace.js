@@ -22,24 +22,31 @@ async function fetchPlaces()
 
       const addressElement = document.createElement("p");
       addressElement.textContent = `Address : ${place.address}`;
+
+      const linkContainer = document.createElement("div");
+      linkContainer.classList.add("link-container");
   
       const updateLink = document.createElement("a");
-      updateLink.textContent = "Update    ";
-      updateLink.href = `http://localhost:3001/html/updateplace.html?id=${place.id}`;
+      updateLink.textContent = "Update";
+      updateLink.href = `http://localhost:3000/html/updateplace.html?id=${place.id}`;
+      updateLink.classList.add("link");
 
       const deleteLink = document.createElement("a");
       deleteLink.textContent = "Delete";
-      deleteLink.href = `http://localhost:3001/html/deleteplace.html?id=${place.id}`;
+      deleteLink.href = `http://localhost:3000/html/deleteplace.html?id=${place.id}`;
+      deleteLink.classList.add("link");
 
+      linkContainer.appendChild(updateLink);
+      linkContainer.appendChild(deleteLink);
       // ... add more elements for other book data (optional)
   
       placeItem.appendChild(nameElement);
       placeItem.appendChild(descriptionElement);
       placeItem.appendChild(operatinghoursElement);
       placeItem.appendChild(addressElement);
-
-      placeItem.appendChild(updateLink);
-      placeItem.appendChild(deleteLink);
+    
+      
+      placeItem.appendChild(linkContainer);
       // ... append other elements
   
       placeList.appendChild(placeItem);

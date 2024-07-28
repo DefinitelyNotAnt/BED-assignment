@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () =>
     }
 
     document.getElementById('confirmDelete').addEventListener('click', async () => {
-        const response = await fetch(`http://localhost:3001/places/${placeId}`, {
+        const response = await fetch(`http://localhost:3000/places/${placeId}`, {
             method: 'DELETE'
         });
 

@@ -9,15 +9,7 @@
 </head>
 <body>
     <div class = "container">
-        <!-- <form action="http://localhost:3001/places" method="POST">
-            <h3>Create places</h3>
-            <input type = "text" id="place name" placeholder="Place name" required>
-            <textarea id = "text" rows = "4" placeholder="Descriptions" required></textarea>
-            <input type = "text" id="description" placeholder="Description" required>
-            <input type = "text" id="time" placeholder="Operating hours" required>
-            <input type = "text" id="address" placeholder="Address" required>
-            <button type = "submit">Send</button>
-        </form> -->
+        
         <form id="placeForm">
             <h3>Create places</h3>
             <input type="text" id="name" placeholder="Place name" required>
@@ -43,7 +35,7 @@
 
             console.log(formData);
             // Send the form data using fetch
-            fetch('http://localhost:3001/places', 
+            fetch('http://localhost:3000/places', 
             {
                 method: 'POST',
                 headers: 
