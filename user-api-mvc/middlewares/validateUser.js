@@ -44,7 +44,7 @@ const validateUpdateUser = (req, res, next) => {
       confirmPassword: Joi.string().min(8).max(50).required(),
       email: Joi.string().min(3).email()
     },
-    oldPassword: Joi.string().min(8).max(50).required()
+    oldPassword: Joi.string().min(8).required()
   });
   const validation = schema.validate(req.body, { abortEarly: true }); // Validate request body
     console.log("Check finished");

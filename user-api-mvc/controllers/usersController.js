@@ -177,10 +177,17 @@ async function searchUsers(req, res) {
     
     console.log(users)
     var returnData = {
-      "userid": users.UserId,
+      "userid": users.userId,
       "otp": otpString,
-      "password": users.PasswordHash
+      "password": users.password,
+      "newUserData": {
+        "username": users.loginName,
+        "password": users.password,
+        "email": users.email
+      }
     }
+    console.log("returnData");
+    console.log(returnData);
     res.json(returnData);
   } catch (error) {
     console.error(error);

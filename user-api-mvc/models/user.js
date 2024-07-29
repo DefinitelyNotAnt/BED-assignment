@@ -85,11 +85,12 @@ class User {
     const checkResult = await request.query(sqlQueryCheck);
 
     // Check if the old password is correct
-    if (!await bcrypt.compare(oldPassword, checkResult.recordset[0].PasswordHash)){
+    if (!await bcrypt.compare(oldPassword, checkResult.recordset[0].PasswordHash) && !await bcrypt.compare(userData.password, checkResult.recordset[0].PasswordHash)){
       // End function
       connection.close();
       return null;
     }
+
 
     // Update all User data for that specific user
     const sqlQuery = `UPDATE Users SET LoginName = @loginName, PasswordHash = @hashedPassword, Email = @email WHERE UserID = @id`; // Parameterized query
