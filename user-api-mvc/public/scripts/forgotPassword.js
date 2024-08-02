@@ -30,10 +30,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log("Email sent.");
             let input = prompt('Email sent. Type out the One-Time Password sent.', "");
             // Handle successful response
-            // console.log('Success:', data);
             if (input == data.otp){
                 let input = prompt('Confirmation Successful! Enter new password: ');
-                console.log(data);
                 changePassword(input,data);
                 window.location.href = `http://localhost:3000/index.html`;
             }
@@ -64,8 +62,6 @@ function changePassword(pass,data){
         },
         "oldPassword": data.newUserData.password
     };
-    console.log("login data: ");
-    console.log(loginData);
     fetch('http://localhost:3000/users', {
         method: 'PUT',
         headers: {
@@ -81,7 +77,6 @@ function changePassword(pass,data){
     })
     .then(data => {
         // Handle successful response
-        console.log('Success:', data);
         alert('Updated successfully!');
     })
     .catch(error => {

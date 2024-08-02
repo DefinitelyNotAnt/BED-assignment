@@ -3,10 +3,8 @@ const UserProfile = require("../models/userProfile");
 
 const getProfileById = async (req, res) => {
     var userId = req.headers.userid;
-    console.log(userId);
     try {
         const profile = await UserProfile.getProfileById(userId);
-        console.log(profile);
         if (!profile) {
             return res.status(404).send("Profile not found");
         }

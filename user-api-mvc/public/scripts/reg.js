@@ -13,7 +13,6 @@ document.getElementById('regForm').addEventListener('submit', function(event) {
         "confirmPassword": document.getElementById('confirmPassword').value,
         "email": document.getElementById('email').value
     };
-    console.log(newData);
     // Send the form data using Fetch API
     fetch('http://localhost:3000/users', {
         method: 'POST',
@@ -30,7 +29,6 @@ document.getElementById('regForm').addEventListener('submit', function(event) {
     })
     .then(data => {
         // Handle successful response
-        console.log('Success:', data);
         if (data == "User Taken"){
             alert("User Taken.");
         }
@@ -50,7 +48,6 @@ const createProfile = (id) => {
     const newData = {
         "userid": id
     }
-    console.log(newData);
     fetch('http://localhost:3000/profiles', {
         method: 'POST',
         headers: {
@@ -65,9 +62,7 @@ const createProfile = (id) => {
         throw new Error('Network response was not ok.');
     })
     .then(data => {
-        console.log("Changed");
         // Handle successful response
-        // console.log('Success:', data);
         alert('Registered Successfully!')
         window.location.href = `http://localhost:3000/index.html`;
     })

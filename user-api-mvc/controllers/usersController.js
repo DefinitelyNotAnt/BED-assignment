@@ -11,6 +11,7 @@ var nodemailer = require('nodemailer');
 
 const getAllUsers = async (req, res) => {
   try {
+    console.log("In")
     const users = await User.getAllUsers();
     res.json(users);
   } catch (error) {
@@ -28,7 +29,6 @@ const getUserById = async (req, res) => {
     if (err) {
       console.error('Token verification failed');
     } else {
-      // console.log('Decoded token:', decodedToken);
       userId = decodedToken.userid;
     }})
   try {
@@ -47,7 +47,6 @@ const updateUser = async (req, res) => {
   const userId = req.body.userid;
   const newUserData = req.body.newUserData;
   const oldPassword = req.body.oldPassword;
-  // console.log(oldPassword);
   try {
     const updatedUser = await User.updateUser(userId, newUserData, oldPassword);
     if (!updatedUser) {
@@ -61,7 +60,6 @@ const updateUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  console.log("Create");
   const newUser = req.body;
   try {
     const createdUser = await User.createUser(newUser);
@@ -73,11 +71,11 @@ const createUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     console.log("Error 500: Error creating user");
+    res.status(500).send("Error creating user");
   }
 };
 
 const deleteUser = async (req, res) => {
-  console.log(req.body.userid);
   const userId = req.body.userid;
   try {
     const step1success = await UserProfile.deleteProfile(userId);
@@ -96,18 +94,15 @@ const deleteUser = async (req, res) => {
 };
 
 const loginUser = async (req,res) => {
-  console.log("logging:")
   const username = req.body.username;
   const password = req.body.password;
   try{
     const tokens = await User.loginUser(username, password);
-    console.log(tokens);
     if (tokens == null) {
       res.status(404).send("Failed to log in.");
       return error;
     }
     else{
-      console.log(tokens.refresh);
       res.cookie("jwt", tokens.refresh, {
         sameSite: 'None', 
         secure: true,
@@ -138,7 +133,7 @@ const resetPassword = async (req, res) => {
         console.log("User taken");
   
       }
-      res.status(201).json(createdUser);
+      res.status(201).json(getUser);
     } catch (error) {
       console.error(error);
       console.log("Error 500: Error creating user");
@@ -151,8 +146,10 @@ async function searchUsers(req, res) {
     const users = await User.searchUsers(searchTerm);
     const OTP = Math.floor(Math.random()*999999);
     const otpString = String(OTP).padStart(6, '0');
-    console.log(otpString);
     var transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       service: 'gmail',
       auth: {
         user: 'noreply.resetpassauthenticator@gmail.com',
@@ -166,16 +163,20 @@ async function searchUsers(req, res) {
       subject: 'Password reset',
       text: 'Your OTP is: ' + otpString
     };
-
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
-    });
+    try{
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+    }
+    catch{
+      console.log("Failed to send email.");
+    }
     
-    console.log(users)
+    
     var returnData = {
       "userid": users.userId,
       "otp": otpString,
@@ -186,8 +187,6 @@ async function searchUsers(req, res) {
         "email": users.email
       }
     }
-    console.log("returnData");
-    console.log(returnData);
     res.json(returnData);
   } catch (error) {
     console.error(error);

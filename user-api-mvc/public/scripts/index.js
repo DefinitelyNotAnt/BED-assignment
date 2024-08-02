@@ -6,7 +6,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         "username": document.getElementById('username').value,
         "password": document.getElementById('password').value
     };
-    console.log(loginData);
     // Send the form data using Fetch API
     fetch('http://localhost:3000/login', {
         method: 'POST',
@@ -23,7 +22,6 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     })
     .then(data => {
         // Handle successful response
-        // console.log('Success:', data);
         window.location.href = `http://localhost:3000/index1.html`;
         alert('Logged in successfully!');
     })

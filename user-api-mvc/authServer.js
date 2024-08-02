@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const { name } = require('body-parser');
 const sql = require("mssql");
 const cookieParser = require('cookie-parser');
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json"); // Import generated spec
 
 
  // Dbconfig
@@ -37,7 +39,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 app.use(staticMiddleware); // Mount the static middleware
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 let refreshTokens = [];
 

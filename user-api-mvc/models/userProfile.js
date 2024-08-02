@@ -22,7 +22,6 @@ class UserProfile {
 
      // Get specific user by Id
     static async getProfileById(id) {
-        console.log("In function with id: " + id)
         // Connect to DB
         const connection = await sql.connect(dbConfig);
         // Select the User Profile with the id as id is unique
@@ -49,7 +48,6 @@ class UserProfile {
     // Create Profile
     static async createProfile(id){
         // Connect DB
-        console.log("Inside");
         const connection = await sql.connect(dbConfig);
         // Send request
         const request = connection.request();
@@ -61,13 +59,10 @@ class UserProfile {
         request.input("id", id);
         request.input("profile", null); 
         request.input("desc", "Hi, I'm a person who's too lazy to make a description."); // Handle empty description with template
-        console.log(sqlQuery);
         // Send request
         await request.query(sqlQuery);
         // Close connection
         connection.close();
-        console.log("Outside");
-        console.log(id);
         // Return new data
         return this.getProfileById(id); // returning the updated User data
     }
@@ -98,7 +93,6 @@ class UserProfile {
         await request.query(sqlQuery);
         // Close connection
         connection.close();
-        console.log("getting out update");
         // Return new data
         return this.getProfileById(id); // returning the updated User data
     }

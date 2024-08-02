@@ -27,7 +27,9 @@ class User {
   // Get All Users
   static async getAllUsers() {
     // Connect to DB
+    console.log("Calling SQL")
     const connection = await sql.connect(dbConfig);
+    console.log("In SQL")
     // Get all Users
     const sqlQuery = `SELECT * FROM Users`; 
     // Send request
@@ -67,8 +69,6 @@ class User {
   }
   // Update User
   static async updateUser(id, userData, oldPassword) {
-    console.log(id);
-    console.log("Updating");
     // Hash new password + Add hashing time per request 
     if (userData == undefined){
       return null;
@@ -85,7 +85,7 @@ class User {
     const checkResult = await request.query(sqlQueryCheck);
 
     // Check if the old password is correct
-    if (!await bcrypt.compare(oldPassword, checkResult.recordset[0].PasswordHash) && !await bcrypt.compare(userData.password, checkResult.recordset[0].PasswordHash)){
+    if (!await bcrypt.compare(oldPassword, checkResult.recordset[0].PasswordHash) && oldPassword != checkResult.recordset[0].PasswordHash){
       // End function
       connection.close();
       return null;
@@ -99,7 +99,6 @@ class User {
     request.input("loginName", userData.username); 
     request.input("hashedPassword", hashedPassword);
     request.input("email", userData.email || null); // Handle removing email
-    console.log(sqlQuery);
     // Send request
     await request.query(sqlQuery);
     // Close connection
@@ -204,7 +203,6 @@ class User {
         console.log("Works")
         // Create refresh token
         const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
-        // console.log(refreshToken);
         // Add to refresh token list
         return {"access":accessToken,"refresh": refreshToken};
       }
@@ -240,8 +238,6 @@ class User {
       `;
 
       const result = await connection.request().query(query);
-      console.log("query thru");
-      console.log(result.recordset[0].UserID);
       await connection.close();
       return this.getUserById(result.recordset[0].UserID);
     } catch (error) {

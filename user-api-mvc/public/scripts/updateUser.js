@@ -52,15 +52,11 @@ window.addEventListener("DOMContentLoaded", async ()=> {
     })
     .then(data => {
         // Handle successful response
-        // Testing
-        // console.log('Success:', data);
         displayUsername.innerText = data.loginName;
         username.value = data.loginName;
         email.value = data.email;
         userid.innerText = "Your user id: "+data.userId;
         userId = data.userId;
-        console.log("moving on");
-        console.log(userId);
         loadProfile();
     })
     .catch(error => {
@@ -72,7 +68,6 @@ window.addEventListener("DOMContentLoaded", async ()=> {
 
 function loadProfile(){
     // Getting Icon and Description
-    console.log("ID:"+userId);
     // Get info
     fetch('http://localhost:3000/profiles', {
         method: 'GET',
@@ -85,13 +80,10 @@ function loadProfile(){
         if (response.ok) {
             return response.json();
         }
-        console.log(response);
         throw new Error('Network response was not ok.');
     })
     .then(data => {
         // Handle successful response
-        // Testing
-         console.log('Success:', data);
         icon.value = data.userProfile;
         description.value = data.userDesc;
         displayDescription.innerHTML = `<div id="displayDescription">${data.userDesc}</div>`;
@@ -149,7 +141,6 @@ function loadProfile(){
             if (newPassword.value == ''){
                 loginData.userData.password = oldPassword.value;
             }
-            console.log("logindata: "+loginData);
             // Send the form data using Fetch API
             fetch('http://localhost:3000/users', {
                 method: 'PUT',
@@ -166,7 +157,6 @@ function loadProfile(){
             })
             .then(data => {
                 // Handle successful response
-                console.log('Success:', data);
                 icon.value = data.userProfile;
                 description.value = data.userDesc;
                 displayDescription.innerHTML = `<div id="displayDescription">${data.userDesc}</div>`;
@@ -205,8 +195,6 @@ document.getElementById('updateForm').addEventListener('submit', function(event)
             "desc": description.value
         }
     };
-    console.log("Display data: ");
-    console.log(displayData.newProfileData);
     // Send the form data using Fetch API
     fetch('http://localhost:3000/profiles', {
         method: 'PUT',
@@ -216,7 +204,6 @@ document.getElementById('updateForm').addEventListener('submit', function(event)
         body: JSON.stringify(displayData)
     })
     .then(response => {
-        console.log(response);
         if (response.ok) {
             return response.json();
         }
@@ -279,7 +266,6 @@ function deleteCheck(){
         })
         .then(data => {
             // Handle successful response
-            console.log('Success:', data);
             alert('Deleted user successfully!');
             window.location.href = `http://localhost:3000/index.html`
         })
@@ -306,7 +292,6 @@ function deleteCheck(){
 logout.addEventListener("click", function (event){
     event.preventDefault();
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-    console.log(document.cookie);
     window.location.href = `http://localhost:3000/index.html`;
 })
 
