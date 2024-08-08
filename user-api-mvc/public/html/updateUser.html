@@ -10,6 +10,11 @@
     <title>Update User</title>
 </head>
 <body>
+    <div id="backgroundCanvas" class="large-header backgroundCanvas">
+        <canvas id="canvas"></canvas>
+        <h1 class="main-title">Connect <span class="thin">Three</span></h1>
+    </div>
+    <div id="return" class="finalPress">Back</div>
     <div id="return" class="finalPress">Back</div>
     <form id="updateForm" action="http://localhost:3000/users" method="POST">
         <div class="flexBox">
@@ -44,6 +49,9 @@
             </div>
         </div>
     <script src="../scripts/updateUser.js"></script>
-    
+    <script src="../scripts/js/TweenLite.min.js" type="text/javascript"></script>
+	<script src="../scripts/js/EasePack.min.js" type="text/javascript"></script>
+	<script src="../scripts/js/rAF.js" type="text/javascript"></script>
+	<script src="../scripts/js/animBg.js" type="text/javascript"></script>
 </body>
 </html>

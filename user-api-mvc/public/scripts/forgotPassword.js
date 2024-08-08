@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
         .then(data => {
             console.log("Email sent.");
-            let input = prompt('Email sent. Type out the One-Time Password sent.', "");
+            console.log(data);
+            window.location.href = `http://localhost:3000/html/OTPEnterScreen.html?email=${data.newUserData.email}`
             // Handle successful response
             if (input == data.otp){
                 let input = prompt('Confirmation Successful! Enter new password: ');
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 returnbtn.addEventListener("click", function (){
     window.location.href = `http://localhost:3000/index.html`;
 })
+
 
 function changePassword(pass,data){
     // Gather form data

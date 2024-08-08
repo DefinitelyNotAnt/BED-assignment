@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter OTP</title>
+
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-7243260-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+      </script>
+</head>
+<body>
+  <div id="backgroundCanvas" class="large-header backgroundCanvas">
+    <canvas id="canvas"></canvas>
+    <h1 class="main-title">Connect <span class="thin">Three</span></h1>
+  </div>
+<div id="return" class="finalPress">Back</div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 16px; background-color: #fbfbfb;">
+  <div style="max-width: 384px; width: 100%; margin-top: auto; margin-bottom: auto;">
+    <img id="avatarIcon" src="../media/defaultIcon.png" width="64" height="64" alt="Gignite logo" style="display: block; margin-left: auto; margin-right: auto; border-radius: 9999px;">
+    <h1 style="font-size: 1.5rem; font-weight: bold; text-align: center; color: #000000; margin-top: 16px; margin-bottom: 16px;">
+      Enter One-Time Password
+    </h1>
+    <div style="border-radius: 8px; background-color: #ffffff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); padding: 24px; margin-top: 16px; margin-bottom: 16px;">
+      <div style="margin-bottom: 16px;">
+        <label for="otp" style="display: block; margin-bottom: 8px;">
+          Enter 6-digit code
+        </label>
+        <input id="otp" type="text" placeholder="• • • • • •" style="display: block; width: 80%; padding: 8px 16px; border: 1px solid #cbd5e0; border-radius: 6px;">
+      </div>
+      <button style="background-color: #edf2f7; color: #1a202c; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; display: block; margin-top: 16px;">
+        Resend Code
+      </button>
+    </div>
+    <p style="font-size: 0.875rem; color: #a0aec0; text-align: center;">
+      The one-time password has been sent to the email address associated with your account.
+    </p>
+  </div>
+</div>
+<script src="../scripts/js/TweenLite.min.js" type="text/javascript"></script>
+		<script src="../scripts/js/EasePack.min.js" type="text/javascript"></script>
+		<script src="../scripts/js/rAF.js" type="text/javascript"></script>
+		<script src="../scripts/js/animBg.js" type="text/javascript"></script>
+</body>
+</html>
