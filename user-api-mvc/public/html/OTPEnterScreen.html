@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enter OTP</title>
-
+    <link rel="stylesheet" href="../styles/updateUser.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet">
 
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -35,10 +38,10 @@
         <label for="otp" style="display: block; margin-bottom: 8px;">
           Enter 6-digit code
         </label>
-        <input id="otp" type="text" placeholder="• • • • • •" style="display: block; width: 80%; padding: 8px 16px; border: 1px solid #cbd5e0; border-radius: 6px;">
+        <input id="otp" type="text" maxlength="6" placeholder="• • • • • •" style="display: block; width: 80%; padding: 8px 16px; border: 1px solid #cbd5e0; border-radius: 6px;">
       </div>
-      <button style="background-color: #edf2f7; color: #1a202c; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; display: block; margin-top: 16px;">
-        Resend Code
+      <button value="submit" id="checkOTP" style="background-color: #edf2f7; color: #1a202c; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; display: block; margin-top: 16px;">
+        Enter
       </button>
     </div>
     <p style="font-size: 0.875rem; color: #a0aec0; text-align: center;">
@@ -46,9 +49,94 @@
     </p>
   </div>
 </div>
+
+<script src="../scripts/verifyOTP.js"></script>
+
 <script src="../scripts/js/TweenLite.min.js" type="text/javascript"></script>
 		<script src="../scripts/js/EasePack.min.js" type="text/javascript"></script>
 		<script src="../scripts/js/rAF.js" type="text/javascript"></script>
 		<script src="../scripts/js/animBg.js" type="text/javascript"></script>
 </body>
 </html>
+
+<style>
+  body {
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      flex-direction: column;
+  }
+  .card {
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      padding: 1rem;
+      box-sizing: border-box;
+  }
+  .card-header {
+      margin-bottom: 1rem;
+  }
+  .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+  }
+  .card-description {
+      color: #6b7280;
+      margin-top: 0.25rem;
+  }
+  .space-y-6 > * + * {
+      margin-top: 1.5rem;
+  }
+  .input {
+      /* width: 100%; */ 
+      /* Change to */
+      width: 80%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+  }
+  .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.25rem;
+      background: #1f2937;
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      cursor: pointer;
+      width: 100%;
+  }
+  .flex {
+      display: flex;
+      align-items: center;
+  }
+  .space-x-4 > * + * {
+      margin-left: 1rem;
+  }
+  .font-medium {
+      font-weight: 500;
+  }
+  .text-primary {
+      color: #3b82f6;
+  }
+  .text-yellow-500 {
+      color: #f59e0b;
+  }
+  .text-muted-foreground {
+      color: #9ca3af;
+  }
+  .icon {
+      display: inline-block;
+  }
+  .icon svg {
+      height: 1.25rem;
+      width: 1.25rem;
+  }
+</style>
