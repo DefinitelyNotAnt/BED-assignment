@@ -1,25 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Places</title>
-    <link rel="stylesheet" href="../styles/stylePlace.css" />
-  </head>
-  <body>
-    <h1>Places API</h1>
-    <section id="place-list"></section>
-    <script src="../scripts/scriptPlace.js"></script>
-    <section class = "sub-header1">
-      
-      <nav>
-           
-           <div class = "nav-links">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Places Page</title>
+</head>
+<body style="font-family: sans-serif;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 16px;">
+    <header style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #E5E7EB; padding: 16px 0;">
+      <img src="https://avatars.githubusercontent.com/u/122350750" alt="Elderly Circle logo" style="width: 48px; height: 48px; border-radius: 50%;">
+      <h1 style="font-size: 24px; font-weight: bold;">Elderly Services &middot; Explore</h1>
+      <div style="position: relative; display: flex; align-items: center;">
+        <input type="text" placeholder="Search places..." style="padding-left: 32px; padding-right: 8px; height: 32px; border: 1px solid #D1D5DB; border-radius: 4px;">
+        <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); color: #9CA3AF;" viewBox="0 0 20 20" fill="currentColor">
+          <path fill="#000000" d="M15.854,14.646l3.792,3.792c0.195,0.195,0.512,0.195,0.707,0l0,0c0.195-0.195,0.195-0.512,0-0.707l-3.792-3.792 C16.47,14.239,16.145,14.239,15.854,14.646z M9,16c-3.859,0-7-3.141-7-7s3.141-7,7-7s7,3.141,7,7S12.859,16,9,16z M9,2 C4.582,2,1,5.582,1,10s3.582,8,8,8s8-3.582,8-8S13.418,2,9,2z"/>
+        </svg>
+      </div>
+      <button id="addPlaceBtn" style="display: flex; align-items: center; padding: 8px 12px; border: 1px solid #D1D5DB; border-radius: 4px; background-color: white; cursor: pointer;">
+        Add Place
+      </button>
+    </header>
+    
+    <main style="padding-top: 32px;">
+      <div style="display: grid; grid-gap: 24px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));" id="placesContainer">
+        <!-- Places will be populated here -->
+      </div>
+    </main>
+
+    <footer style="border-top: 1px solid #E5E7EB; padding: 24px 0;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <button style="padding: 8px 12px; border: 1px solid #D1D5DB; border-radius: 4px; cursor: not-allowed;" disabled>
+          &larr; Previous
+        </button>
+        <span style="font-size: 14px; color: #6B7280;">Page 1 of 10</span>
+        <button style="padding: 8px 12px; border: 1px solid #D1D5DB; border-radius: 4px; cursor: pointer;">
+          Next &rarr;
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../scripts/places.js"></script>
+<section class="sub-header3">
+    <nav>
+        <div class="nav-links">
             <ul>
-                 <li><a href="../index1.html">Home</a></li>
+                <li><a href="../index1.html">Home</a></li>
             </ul>
-          </div>
-      </nav>
-  </section>
-  </body>
+        </div>
+    </nav>
+</section>
+</body>
 </html>

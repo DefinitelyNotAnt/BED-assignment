@@ -1,26 +1,52 @@
 <!DOCTYPE html>
-<html lang = "en">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale = 1.0">
-  <title>Createplace form</title>
-  <link rel ="stylesheet" href="../styles/stylePlace.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Places Page</title>
+    <style>
+        /* Add your styles here */
+        .nav-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .nav-links ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .nav-links ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
-    <div class = "container">
-        
+
+<div style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+    <div style="width: 100%; max-width: 768px; background-color: #f8f9fa; padding: 24px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 16px; text-align: center;">Add a New Place</h1>
+        <p style="font-size: 1.125rem; color: #6c757d; margin-bottom: 32px; text-align: center;">
+            Fill out the form below to add your new place to the listing.
+        </p>
         <form id="placeForm">
-            <h3>Create places</h3>
-            <input type="text" id="name" placeholder="Place name" required>
-            <input type="text" id="description" placeholder="Description" required>
-            <input type="text" id="operatinghours" placeholder="Operating hours" required>
-            <input type="text" id="address" placeholder="Address" required>
-            <button type="submit">Send</button>
+            <div style="margin-bottom: 24px;">
+                <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 8px;">Place Details</h2>
+                <div style="display: grid; gap: 16px;">
+                    <input type="text" id="name" placeholder="Place Name" style="padding: 8px; border: 1px solid #ced4da; border-radius: 4px;" required>
+                    <input type="text" id="description" placeholder="Description" style="padding: 8px; border: 1px solid #ced4da; border-radius: 4px;" required>
+                    <input type="text" id="operatinghours" placeholder="Operating hours" style="padding: 8px; border: 1px solid #ced4da; border-radius: 4px;" required>
+                    <input type="text" id="address" placeholder="Address" style="padding: 8px; border: 1px solid #ced4da; border-radius: 4px;" required>
+                </div>
+            </div>
+            <button type="submit" style="background-color: #007bff; color: #fff; width: 100%; padding: 12px; border: none; border-radius: 4px; margin-top: 24px;">
+                Submit
+            </button>
         </form>
-        
     </div>
-    <script>
+</div>
+<script>
         document.getElementById('placeForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting the default way
             
@@ -33,6 +59,7 @@
                 address: document.getElementById('address').value
             };
 
+            console.log(formData);
             // Send the form data using fetch
             fetch('http://localhost:3000/places', 
             {
@@ -46,15 +73,18 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                alert('Place created successfully');
                 // You can add any additional success handling code here
             })
             .catch((error) => {
                 console.error('Error:', error);
+                alert('Failed to create place');
                 // You can add any additional error handling code here
             });
         });
-        </script>
-    <section class = "sub-header4">
+</script>
+
+<section class = "sub-header4">
       
         <nav>
              
@@ -64,6 +94,8 @@
               </ul>
             </div>
         </nav>
-    </section>
+</section>
+ 
+
 </body>
 </html>

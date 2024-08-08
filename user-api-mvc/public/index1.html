@@ -1,36 +1,174 @@
 <!DOCTYPE html>
-<html lang = "en">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale = 1.0">
-  <title>replit</title>
-  <link rel ="stylesheet" href="./styles/stylePlace.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Sidebar</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            width: 16rem;
+            flex-shrink: 0;
+            border-right: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
+        .sidebar-header img {
+            border-radius: 50%;
+        }
+        .sidebar-header span {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #D97706;
+        }
+        .sidebar-toggle {
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 0.375rem;
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sidebar-toggle svg {
+            width: 1rem;
+            height: 1rem;
+        }
+        .menu {
+            flex: 1;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .menu-item {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 0.375rem;
+        }
+        .menu-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        .menu-item a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .menu-item a span {
+            flex: 1;
+        }
+        .main {
+            flex: 1;
+            overflow: auto;
+            padding: 1rem;
+        }
+        .main img {
+            width: 100%;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-   <section class = "header">
-       <nav>
-           <a href = "index1.html"><img src="./media/menu.jpg"></a>
-           <div class = "nav-links" id="NavLinks">
-            <i class = "fa-fa-times" onclick = "hideMenu()"></i>
-             <ul>
-                <li><a href="index1.html">Home</a></li>
-                <li><a href="./html/places.html">Places</a></li>
-                <li><a href="./html/createplace.html">Create place</a></li>
-                <li><a href="./html/event-index.html">Events</a></li>
-                <li><a href="./html/updateUser.html">Profile</a></li>
-                <li><a href="./html/feedback.html">Feedback</a></li>
-             </ul>
-           </div>
-           <i class = "fa-fa-bars" onclick = "showMenu()"></i>
-       </nav>
-<div class = "text-box">
-     <h1>Welcome to the Elderly community website</h1>
-     <p>Elderly community website is well known for their expertise in solving healthcare problems
-      and helping the elderly to address their health problems and foster proper care for the elderly.
-     </p>
-     <a href="" class="hero-button">Click here for more information</a>
-</div>
-</section>
-
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="https://avatars.githubusercontent.com/u/122350750" alt="Logo" width="40" height="40">
+                <span>Gignite</span>
+            </div>
+            <div class="sidebar-toggle">
+                <svg fill="none" viewBox="0 0 24 24">
+                    <path d="M6 18L18 6M6 6l12 12" stroke="currentColor"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="menu-item">
+                <a href="index1.html">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none"/>
+                        <circle cx="12" cy="10" r="3" stroke="currentColor" fill="currentColor"/>
+                        <line x1="12" y1="13" x2="12" y2="18" stroke="currentColor"/>
+                    </svg>
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="./html/places.html">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" fill="none"/>
+                        <circle cx="12" cy="10" r="3" stroke="currentColor" fill="currentColor"/>
+                        <line x1="12" y1="13" x2="12" y2="18" stroke="currentColor"/>
+                    </svg>
+                    <span>Places</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="./html/createplace.html">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="4" y="4" width="16" height="16" stroke="currentColor" fill="none"/>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor"/>
+                        <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span>Create place</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="./html/event-index.html">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="4" y="4" width="16" height="16" stroke="currentColor" fill="none"/>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor"/>
+                        <line x1="22" y1="22" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span>Events</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="./html/updateUser.html">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" stroke="currentColor" fill="none"/>
+                        <line x1="12" y1="3" x2="12" y2="21" stroke="currentColor"/>
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor"/>
+                    </svg>
+                    <span>Profile</span>
+                </a>
+            </div>
+            <div class="menu-item">
+                <a href="./html/feedback.html">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" stroke="currentColor" fill="none"/>
+                        <line x1="12" y1="3" x2="12" y2="21" stroke="currentColor"/>
+                        <line x1="3" y1="12" x2="21" y2="12" stroke="currentColor"/>
+                    </svg>
+                    <span>Feedback</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <h2 class="text-2xl font-bold mb-4">Collapsible Sidebar</h2>
+        <p class="mb-4">
+            Use the toggle button in the top left to expand and collapse the sidebar. The sidebar menu items can be customized to link to different pages or sections.
+        </p>
+        <img src="https://storage.gignite.ai/mediaengine/model1/1d6d7576-d8ab-4e60-8bbd-bd948cc698bb.png" alt="Placeholder image">
+    </div>
 </body>
+</html>

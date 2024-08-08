@@ -1,31 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Places</title>
-    <link rel="stylesheet" href="../styles/stylePlace.css" />
-  </head>
-  <body>
-    <h1>Update Place</h1>
-    <form id="updateForm">
-        <input type="text" id="name" placeholder="Place name" required>
-        <input type="text" id="description" placeholder="Description" required>
-        <input type="text" id="operatinghours" placeholder="Operating hours" required>
-        <input type="text" id="address" placeholder="Address" required>
-        <button type="submit">Update</button>
-    </form>
-    <script src="../scripts/updatePlace.js"></script>
-    <section class = "sub-header3">
-      
-      <nav>
-           
-           <div class = "nav-links">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Places Page</title>
+    <style>
+        /* Add your styles here */
+        .nav-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .nav-links ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .nav-links ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div style="display: flex; flex-direction: column; height: 100%;">
+    <!-- Header -->
+    <header style="background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 16px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="https://avatars.githubusercontent.com/u/122350750" alt="Gignite Logo" style="height: 32px; width: 32px; border-radius: 50%;">
+                <h1 style="font-size: 1.125rem; font-weight: 600; color: #1a202c;">Update Place Information</h1>
+            </div>
+            <div>Mock code was here</div>
+        </div>
+    </header>
+    
+    <!-- Content -->
+    <div style="padding: 16px; gap: 16px;">
+        <!-- Basic Information -->
+        <div style="background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; padding: 16px;">
+            <h2 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 16px; color: #1a202c;">Basic Information</h2>
+            <form id="updatePlaceForm">
+                <div style="gap: 16px;">
+                    <div style="display: grid; gap: 8px;">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" style="padding: 8px; border: 1px solid #d1d5db; border-radius: 0.25rem;" required/>
+                    </div>
+                    <div style="display: grid; gap: 8px;">
+                      <label for="description">Description</label>
+                      <textarea id="description" name="description" style="padding: 8px; border: 1px solid #d1d5db; border-radius: 0.25rem;" rows="3" required></textarea>
+                    </div>
+                     
+                    <div style="display: grid; gap: 8px;">
+                      <label for="name">Operating hours</label>
+                      <input type="text" id="operatinghours" name="operatinghours" style="padding: 8px; border: 1px solid #d1d5db; border-radius: 0.25rem;" required/>
+                  </div>
+
+                    <div style="display: grid; gap: 8px;">
+                        <label for="address">Address</label>
+                        <div style="display: flex;">
+                            <input type="text" id="address" name="address" style="flex: 1; padding: 8px; border: 1px solid #d1d5db; border-radius: 0.25rem;" required/>
+                        </div>
+                    </div>
+            
+                    <button type="submit" style="background-color: #007bff; color: #fff; padding: 12px; border: none; border-radius: 4px; margin-top: 24px;">
+                        Update Place
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="../scripts/updatePlace.js"></script>
+
+<section class="sub-header3">
+    <nav>
+        <div class="nav-links">
             <ul>
-                 <li><a href="../index1.html">Home</a></li>
+                <li><a href="../index1.html">Home</a></li>
             </ul>
-          </div>
-      </nav>
-  </section>
-  </body>
+        </div>
+    </nav>
+</section>
+
+</body>
 </html>
