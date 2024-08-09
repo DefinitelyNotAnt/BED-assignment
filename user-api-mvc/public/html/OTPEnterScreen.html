@@ -29,17 +29,17 @@
 
     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 16px; background-color: #fbfbfb;">
   <div style="max-width: 384px; width: 100%; margin-top: auto; margin-bottom: auto;">
-    <img id="avatarIcon" src="../media/defaultIcon.png" width="64" height="64" alt="Gignite logo" style="display: block; margin-left: auto; margin-right: auto; border-radius: 9999px;">
+    <img id="avatarIcon" src="../media/defaultIcon.png" width="64" height="64" style="display: block; margin-left: auto; margin-right: auto; border-radius: 9999px;">
     <h1 style="font-size: 1.5rem; font-weight: bold; text-align: center; color: #000000; margin-top: 16px; margin-bottom: 16px;">
       Enter One-Time Password
     </h1>
     <div style="border-radius: 8px; background-color: #ffffff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); padding: 24px; margin-top: 16px; margin-bottom: 16px;">
-      <div style="margin-bottom: 16px;">
+      <form id="forgotForm" action="http://localhost:3000/users/forgot" method="GET" style="margin-bottom: 16px;">
         <label for="otp" style="display: block; margin-bottom: 8px;">
           Enter 6-digit code
         </label>
         <input id="otp" type="text" maxlength="6" placeholder="• • • • • •" style="display: block; width: 80%; padding: 8px 16px; border: 1px solid #cbd5e0; border-radius: 6px;">
-      </div>
+      </form>
       <button value="submit" id="checkOTP" style="background-color: #edf2f7; color: #1a202c; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; display: block; margin-top: 16px;">
         Enter
       </button>

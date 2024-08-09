@@ -9,11 +9,15 @@
   
   body {
     font-family: 'inconsolata', 'Roboto', 'Arial', sans-serif;
-    background: url("../media/common_bg_line.svg");
+    background: linear-gradient(90deg, rgb(255, 255, 228) 0%, rgb(255, 143, 123) 35%, rgb(255, 203, 90) 61%, rgb(202, 255, 103) 100%);
     color: var(--text-color);
     line-height: 1.6;
     margin: 0;
     padding: 0;
+  }
+
+  #loginBody{
+    background: url("../media/common_bg_line.svg");
   }
   img{
     width: 150px;
@@ -157,7 +161,7 @@
     box-shadow: 0 0 0 2px var(--error-color);
   }
   
-  body::before {
+  /* body::before {
     content: "";
     position: fixed;
     top: 0;
@@ -166,7 +170,7 @@
     height: 100%;
     background: linear-gradient(90deg, rgb(255, 255, 228) 0%, rgb(255, 143, 123) 35%, rgb(255, 203, 90) 61%, rgb(202, 255, 103) 100%);
     z-index: -1;
-  }
+  } */
   
   button, #deleteUser, .finalPress {
     position: relative;
@@ -207,4 +211,8 @@
     top: 15px;
     left: 15px;
     background-color: #84c1ff;
+  }
+
+  #profileBody{
+    background: linear-gradient(90deg, rgba(183,179,255,1) 0%, rgba(55,114,221,1) 35%, rgba(74,47,226,1) 61%, rgba(0,212,255,1) 100%);
   }

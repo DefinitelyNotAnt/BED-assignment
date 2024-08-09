@@ -5,6 +5,7 @@ const User = require("../models/user");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const UserProfile = require("../models/userProfile");
+const Otp = require("../models/otps");
 var nodemailer = require('nodemailer');
 
 
@@ -126,17 +127,39 @@ const loginUser = async (req,res) => {
       // }
   }
 }
+
+
+
 const resetPassword = async (req, res) => {
     try {
-      const getUser = await User.createUser(newUser);
-      if (createUser == "User Taken"){
-        console.log("User taken");
-  
+      const { userId, otp } = req.query;
+      const users = await User.getUserById(userId);
+      console.log(users)
+      if (users != null){
+        var returnData = {
+          "userid": users.userId,
+          "password": users.password,
+          "newUserData": {
+            "username": users.loginName,
+            "password": users.password,
+            "email": users.email
+          }
+        }
+        const validateOtp = await Otp.getOtpCheck(users.userId, otp);
+        if (!validateOtp){
+          return res.status(404).send("Otp not valid.");
+        }
+        const refreshToken = jwt.sign(returnData, process.env.REFRESH_TOKEN_SECRET);
+        res.cookie("usrdta", refreshToken, {
+          sameSite: 'None', 
+          secure: true,
+          maxAge: 24 * 60 * 60 * 1000
+        })
+        res.status(201).json(returnData);
       }
-      res.status(201).json(getUser);
-    } catch (error) {
+    } catch (error) { 
       console.error(error);
-      console.log("Error 500: Error creating user");
+      console.log("Error 500: Error updating user");
     }
 }
 
@@ -144,42 +167,41 @@ async function searchUsers(req, res) {
   const searchTerm = req.body.searchTerms; // Extract search term from query params
   try {    
     const users = await User.searchUsers(searchTerm);
-    const OTP = Math.floor(Math.random()*999999);
-    const otpString = String(OTP).padStart(6, '0');
-    var transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      service: 'gmail',
-      auth: {
-        user: 'noreply.resetpassauthenticator@gmail.com',
-        pass: 'mizv kmef kciq xhrb'
-      }
-    }); 
+    // const OTP = Math.floor(Math.random()*999999);
+    // const otpString = String(OTP).padStart(6, '0');
+    // var transporter = nodemailer.createTransport({
+    //   host: 'smtp.gmail.com',
+    //   port: 465,
+    //   secure: true,
+    //   service: 'gmail',
+    //   auth: {
+    //     user: 'noreply.resetpassauthenticator@gmail.com',
+    //     pass: 'mizv kmef kciq xhrb'
+    //   }
+    // }); 
 
-    var mailOptions = {
-      from: 'noreply.resetpassauthenticator@gmail.com',
-      to: users.email,
-      subject: 'Password reset',
-      text: 'Your OTP is: ' + otpString
-    };
-    try{
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Email sent: ' + info.response);
-        }
-      });
-    }
-    catch{
-      console.log("Failed to send email.");
-    }
+    // var mailOptions = {
+    //   from: 'noreply.resetpassauthenticator@gmail.com',
+    //   to: users.email,
+    //   subject: 'Password reset',
+    //   text: 'Your OTP is: ' + otpString
+    // };
+    // try{
+    //   transporter.sendMail(mailOptions, function(error, info){
+    //     if (error) {
+    //       console.log(error);
+    //     } else {
+    //       console.log('Email sent: ' + info.response);
+    //     }
+    //   });
+    // }
+    // catch{
+    //   console.log("Failed to send email.");
+    // }
     
     
     var returnData = {
       "userid": users.userId,
-      "otp": otpString,
       "password": users.password,
       "newUserData": {
         "username": users.loginName,
@@ -187,6 +209,19 @@ async function searchUsers(req, res) {
         "email": users.email
       }
     }
+
+    try{
+      var returnOtp = Otp.sendOtp(users.userId,users.email);
+      if (returnOtp == null){
+        throw error;
+      }
+    }
+    catch{
+      res.status(400).json({
+        message: "Error sending email."
+      });
+    }
+
     res.json(returnData);
   } catch (error) {
     console.error(error);

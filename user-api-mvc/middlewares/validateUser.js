@@ -33,6 +33,7 @@ const validateCreateUser = (req, res, next) => {
     next(); // If validation passes, proceed to the next route handler
 }
 const validateUpdateUser = (req, res, next) => {
+  console.log(req.body);
   const schema = Joi.object({
     userid: Joi.required(),
     newUserData: {

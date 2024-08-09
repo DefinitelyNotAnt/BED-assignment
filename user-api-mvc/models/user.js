@@ -233,14 +233,15 @@ class User {
       const query = `
         SELECT *
         FROM Users
-        WHERE LoginName LIKE '%${searchTerm}%'
-          OR email LIKE '%${searchTerm}%'
+        WHERE LoginName LIKE '${searchTerm}'
+          OR email LIKE '${searchTerm}'
       `;
 
       const result = await connection.request().query(query);
       await connection.close();
       return this.getUserById(result.recordset[0].UserID);
     } catch (error) {
+      console.log(error);
       throw new Error("Error searching users"); // Or handle error differently
     } finally {
       await connection.close(); // Close connection even on errors

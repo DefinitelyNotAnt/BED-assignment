@@ -53,6 +53,7 @@ app.put("/profiles", profilesController.updateProfile); // Update user
 app.put("/users", validateUsers.validateUpdateUser, usersController.updateUser); // Update user
 app.delete("/users", usersController.deleteUser); // Delete user
 app.post("/users/forgot", usersController.searchUsers); // Search email for user to reset password
+app.get("/users/forgot", usersController.resetPassword); // Search email for user to reset password
 
 // Places routes
 app.get("/places", placesController.getAllPlaces);

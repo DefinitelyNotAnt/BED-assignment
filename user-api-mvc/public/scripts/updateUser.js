@@ -7,8 +7,10 @@
 const userid = document.getElementById("userId");
 const username = document.getElementById("username");
 const displayUsername = document.getElementById("displayName");
+const smallName = document.getElementById("smallName");
 const icon = document.getElementById("iconUrl");
 const displayIcon = document.getElementById("displayIcon");
+const smallIcon = document.getElementById("smallProfile");
 const description = document.getElementById("description");
 const displayDescription = document.getElementById("displayDescription");
 const email = document.getElementById("email");
@@ -18,7 +20,6 @@ const confirmPassword = document.getElementById("confirmPassword");
 
 
 const logout = document.getElementById("logout");
-const returnbtn = document.getElementById("return");
 
 var userId;
 
@@ -53,6 +54,7 @@ window.addEventListener("DOMContentLoaded", async ()=> {
     .then(data => {
         // Handle successful response
         displayUsername.innerText = data.loginName;
+        smallName.innerText = data.loginName;
         username.value = data.loginName;
         email.value = data.email;
         userid.innerText = "Your user id: "+data.userId;
@@ -90,9 +92,11 @@ function loadProfile(){
         if (data.userProfile != "undefined" && data.userProfile != "" && data.userProfile != null){
             try{
                 displayIcon.src = data.userProfile;
+                smallIcon.src = data.userProfile;
             }
             catch{
                 displayIcon.src = "../media/defaultIcon.png";
+                smallIcon.src = "../media/defaultIcon.png";
             }
         }
         else{
@@ -293,8 +297,4 @@ logout.addEventListener("click", function (event){
     event.preventDefault();
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
     window.location.href = `http://localhost:3000/index.html`;
-})
-
-returnbtn.addEventListener("click", function (){
-    window.location.href = `http://localhost:3000/index1.html`;
 })
